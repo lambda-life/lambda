@@ -6,7 +6,7 @@ final class View: SKView, SKSceneDelegate {
     var times = Times()
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
-    private let universe = Universe(size: 20)
+    private let universe = Universe(size: 50)
     
     required init?(coder: NSCoder) { nil }
     init() {
@@ -24,11 +24,11 @@ final class View: SKView, SKSceneDelegate {
         scene.camera = camera
         presentScene(scene)
         
-        let delta = (CGFloat(universe.grid.size) / 2) * 20
+        let delta = (CGFloat(universe.grid.size) / 2) * 12
         cells = (0 ..< universe.grid.size).map { x in
             (0 ..< universe.grid.size).map { y in
-                let cell = Cell(radius: 10)
-                cell.position = .init(x: .init(x * 20) - delta, y: .init(y * 20) - delta)
+                let cell = Cell(radius: 5)
+                cell.position = .init(x: .init(x * 12) - delta, y: .init(y * 12) - delta)
                 scene.addChild(cell)
                 return cell
             }
@@ -42,7 +42,7 @@ final class View: SKView, SKSceneDelegate {
             self?.cells[$0.x][$0.y].alive = false
         }.store(in: &subs)
         
-        universe.seed(100)
+        universe.seed(500)
     }
     
     final func update(_ time: TimeInterval, for: SKScene) {
