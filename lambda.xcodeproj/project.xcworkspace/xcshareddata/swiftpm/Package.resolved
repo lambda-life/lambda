@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Automata",
+        "repositoryURL": "https://github.com/lambda-life/automata.git",
+        "state": {
+          "branch": "master",
+          "revision": "98b4e00b4a9ed5853c58de53a8b8240d03565760",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
