@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE331F78249CA85D001DA622 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331F77249CA85D001DA622 /* View+.swift */; };
+		CE331F7B249CAB0C001DA622 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CE331F7A249CAB0C001DA622 /* LICENSE */; };
 		CED98457249C91650095C78A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98456249C91650095C78A /* App.swift */; };
 		CED98459249C91650095C78A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Main.swift */; };
 		CED9845B249C91650095C78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED9845A249C91650095C78A /* Assets.xcassets */; };
@@ -22,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		CE331F77249CA85D001DA622 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		CE331F79249CAAFA001DA622 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CE331F7A249CAB0C001DA622 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CED98453249C91650095C78A /* Lambda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lambda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED98456249C91650095C78A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CED98458249C91650095C78A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -51,6 +54,8 @@
 		CED98448249C91510095C78A = {
 			isa = PBXGroup;
 			children = (
+				CE331F7A249CAB0C001DA622 /* LICENSE */,
+				CE331F79249CAAFA001DA622 /* README.md */,
 				CED98455249C91650095C78A /* macOS */,
 				CED98454249C91650095C78A /* Products */,
 				CED98466249C92020095C78A /* Shared */,
@@ -154,6 +159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE331F7B249CAB0C001DA622 /* LICENSE in Resources */,
 				CED9845B249C91650095C78A /* Assets.xcassets in Resources */,
 				CED9846B249C92550095C78A /* Localizable.strings in Resources */,
 			);
