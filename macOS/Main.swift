@@ -1,7 +1,7 @@
 import AppKit
 
-final class Game: NSWindow, NSWindowDelegate {
-    override var frameAutosaveName: NSWindow.FrameAutosaveName { "Game" }
+final class Main: NSWindow, NSWindowDelegate {
+    override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 600, height: 600), styleMask:
@@ -14,6 +14,7 @@ final class Game: NSWindow, NSWindowDelegate {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
+        contentView = View()
         if !setFrameUsingName(frameAutosaveName) {
             center()
         }

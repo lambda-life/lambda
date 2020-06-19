@@ -8,24 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		CED98457249C91650095C78A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98456249C91650095C78A /* App.swift */; };
-		CED98459249C91650095C78A /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Game.swift */; };
+		CED98459249C91650095C78A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Main.swift */; };
 		CED9845B249C91650095C78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED9845A249C91650095C78A /* Assets.xcassets */; };
 		CED98465249C91EB0095C78A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98464249C91EB0095C78A /* Menu.swift */; };
 		CED98468249C920E0095C78A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98467249C920E0095C78A /* String.swift */; };
 		CED9846B249C92550095C78A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED98469249C92550095C78A /* Localizable.strings */; };
 		CED9846E249C943C0095C78A /* Automata in Frameworks */ = {isa = PBXBuildFile; productRef = CED9846D249C943C0095C78A /* Automata */; };
+		CED98470249C96A40095C78A /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9846F249C96A40095C78A /* View.swift */; };
+		CED98472249C96E20095C78A /* Times.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98471249C96E20095C78A /* Times.swift */; };
+		CED98474249C9B500095C78A /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98473249C9B500095C78A /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CED98453249C91650095C78A /* Lambda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lambda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED98456249C91650095C78A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		CED98458249C91650095C78A /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CED98458249C91650095C78A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		CED9845A249C91650095C78A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED9845F249C91650095C78A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED98460249C91650095C78A /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		CED98464249C91EB0095C78A /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		CED98467249C920E0095C78A /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		CED9846A249C92550095C78A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CED9846F249C96A40095C78A /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		CED98471249C96E20095C78A /* Times.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Times.swift; sourceTree = "<group>"; };
+		CED98473249C9B500095C78A /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +69,7 @@
 				CED98460249C91650095C78A /* macOS.entitlements */,
 				CED9845F249C91650095C78A /* Info.plist */,
 				CED98456249C91650095C78A /* App.swift */,
-				CED98458249C91650095C78A /* Game.swift */,
+				CED98458249C91650095C78A /* Main.swift */,
 				CED98464249C91EB0095C78A /* Menu.swift */,
 				CED9845A249C91650095C78A /* Assets.xcassets */,
 			);
@@ -73,7 +79,10 @@
 		CED98466249C92020095C78A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CED98473249C9B500095C78A /* Cell.swift */,
 				CED98467249C920E0095C78A /* String.swift */,
+				CED98471249C96E20095C78A /* Times.swift */,
+				CED9846F249C96A40095C78A /* View.swift */,
 				CED98469249C92550095C78A /* Localizable.strings */,
 			);
 			path = Shared;
@@ -154,8 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED98472249C96E20095C78A /* Times.swift in Sources */,
 				CED98465249C91EB0095C78A /* Menu.swift in Sources */,
-				CED98459249C91650095C78A /* Game.swift in Sources */,
+				CED98474249C9B500095C78A /* Cell.swift in Sources */,
+				CED98459249C91650095C78A /* Main.swift in Sources */,
+				CED98470249C96A40095C78A /* View.swift in Sources */,
 				CED98468249C920E0095C78A /* String.swift in Sources */,
 				CED98457249C91650095C78A /* App.swift in Sources */,
 			);

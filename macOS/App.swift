@@ -1,6 +1,6 @@
 import AppKit
 
-@NSApplicationMain final class App: NSApplication, NSApplicationDelegate,  {
+@NSApplicationMain final class App: NSApplication, NSApplicationDelegate  {
     required init?(coder: NSCoder) { nil }
     override init() {
         super.init()
@@ -9,6 +9,6 @@ import AppKit
     
     func applicationWillFinishLaunching(_: Notification) {
         mainMenu = Menu()
-        Game().makeKeyAndOrderFront(nil)
+        Main().makeKeyAndOrderFront(nil)
     }
 }
