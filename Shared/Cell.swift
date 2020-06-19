@@ -1,16 +1,15 @@
 import SpriteKit
 
-final class Cell: SKShapeNode {
+final class Cell: SKSpriteNode {
     var alive = false {
         didSet {
-            fillColor = alive ? .systemBlue : .clear
+            run(.colorize(with: alive ? .systemBlue : .clear, colorBlendFactor: 1, duration: 0.3))
         }
     }
     
     required init?(coder: NSCoder) { nil }
     init(radius: CGFloat) {
-        super.init()
-        path = .init(rect: .init(x: -radius, y: -radius, width: radius * 2, height: radius * 2), transform: nil)
-        lineWidth = 0
+        super.init(texture: .init(imageNamed: "cell"), color: .clear, size: .init(width: radius * 2, height: radius * 2))
+        colorBlendFactor = 1
     }
 }

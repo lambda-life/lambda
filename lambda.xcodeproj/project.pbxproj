@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE331F78249CA85D001DA622 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331F77249CA85D001DA622 /* View+.swift */; };
+		CE8A050D249D148400C460C6 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8A050C249D148400C460C6 /* Media.xcassets */; };
 		CED98457249C91650095C78A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98456249C91650095C78A /* App.swift */; };
 		CED98459249C91650095C78A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Main.swift */; };
 		CED9845B249C91650095C78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED9845A249C91650095C78A /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		CE331F79249CAAFA001DA622 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE331F7A249CAB0C001DA622 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CE331F7C249CAB45001DA622 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		CE8A050C249D148400C460C6 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		CED98453249C91650095C78A /* Lambda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lambda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED98456249C91650095C78A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CED98458249C91650095C78A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				CED98467249C920E0095C78A /* String.swift */,
 				CED98471249C96E20095C78A /* Times.swift */,
 				CED9846F249C96A40095C78A /* View.swift */,
+				CE8A050C249D148400C460C6 /* Media.xcassets */,
 				CED98469249C92550095C78A /* Localizable.strings */,
 			);
 			path = Shared;
@@ -161,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED9845B249C91650095C78A /* Assets.xcassets in Resources */,
+				CE8A050D249D148400C460C6 /* Media.xcassets in Resources */,
 				CED9846B249C92550095C78A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
