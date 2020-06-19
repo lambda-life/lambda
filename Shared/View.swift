@@ -6,7 +6,7 @@ final class View: SKView, SKSceneDelegate {
     var times = Times()
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
-    private let universe = Universe(size: 10)
+    private let universe = Universe(size: 20)
     
     required init?(coder: NSCoder) { nil }
     init() {
@@ -42,7 +42,7 @@ final class View: SKView, SKSceneDelegate {
             self?.cells[$0.x][$0.y].alive = false
         }.store(in: &subs)
         
-        universe.seed(50)
+        universe.seed(100)
     }
     
     final func update(_ time: TimeInterval, for: SKScene) {

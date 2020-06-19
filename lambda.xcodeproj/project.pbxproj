@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE331F78249CA85D001DA622 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331F77249CA85D001DA622 /* View+.swift */; };
 		CED98457249C91650095C78A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98456249C91650095C78A /* App.swift */; };
 		CED98459249C91650095C78A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Main.swift */; };
 		CED9845B249C91650095C78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED9845A249C91650095C78A /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE331F77249CA85D001DA622 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		CED98453249C91650095C78A /* Lambda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lambda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED98456249C91650095C78A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CED98458249C91650095C78A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				CED98456249C91650095C78A /* App.swift */,
 				CED98458249C91650095C78A /* Main.swift */,
 				CED98464249C91EB0095C78A /* Menu.swift */,
+				CE331F77249CA85D001DA622 /* View+.swift */,
 				CED9845A249C91650095C78A /* Assets.xcassets */,
 			);
 			path = macOS;
@@ -167,6 +170,7 @@
 				CED98465249C91EB0095C78A /* Menu.swift in Sources */,
 				CED98474249C9B500095C78A /* Cell.swift in Sources */,
 				CED98459249C91650095C78A /* Main.swift in Sources */,
+				CE331F78249CA85D001DA622 /* View+.swift in Sources */,
 				CED98470249C96A40095C78A /* View.swift in Sources */,
 				CED98468249C920E0095C78A /* String.swift in Sources */,
 				CED98457249C91650095C78A /* App.swift in Sources */,
