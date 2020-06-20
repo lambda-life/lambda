@@ -38,13 +38,11 @@ final class Main: NSWindow, NSWindowDelegate {
         saveFrame(usingName: frameAutosaveName)
     }
     
-    override func becomeKey() {
-        super.becomeKey()
-        view.isPaused = false
+    func windowDidBecomeKey(_: Notification) {
+        view.pause(false)
     }
     
-    override func resignKey() {
-        super.resignKey()
-        view.isPaused = true
+    func windowDidResignKey(_: Notification) {
+        view.pause(true)
     }
 }
