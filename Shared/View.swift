@@ -6,7 +6,12 @@ final class View: SKView, SKSceneDelegate {
     var times = Times()
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
-    private let universe = Universe(size: 50)
+    private let universe = Universe(size: 25)
+    private let playerA = Player(color: .systemBlue)
+    private let playerB = Player(color: .systemPink)
+    private let playerC = Player(color: .systemPurple)
+    private let playerD = Player(color: .systemIndigo)
+    private let playerE = Player(color: .systemOrange)
     
     required init?(coder: NSCoder) { nil }
     init() {
@@ -24,9 +29,9 @@ final class View: SKView, SKSceneDelegate {
         scene.camera = camera
         presentScene(scene)
         
-        let delta = (CGFloat(universe.grid.size) / 2) * 12
-        cells = (0 ..< universe.grid.size).map { x in
-            (0 ..< universe.grid.size).map { y in
+        let delta = (CGFloat(universe.size) / 2) * 12
+        cells = (0 ..< universe.size).map { x in
+            (0 ..< universe.size).map { y in
                 let cell = Cell(radius: 5)
                 cell.position = .init(x: .init(x * 12) - delta, y: .init(y * 12) - delta)
                 scene.addChild(cell)
@@ -34,21 +39,23 @@ final class View: SKView, SKSceneDelegate {
             }
         }
         
-        universe.born.sink { [weak self] in
-            self?.cells[$0.x][$0.y].alive = true
+        universe.cell.sink { [weak self] in
+            self?.cells[$0.1.x][$0.1.y].player = $0.0 as? Player
         }.store(in: &subs)
         
-        universe.die.sink { [weak self] in
-            self?.cells[$0.x][$0.y].alive = false
-        }.store(in: &subs)
-        
-        universe.seed(500)
+        universe.random(25, automaton: playerA)
+        universe.random(25, automaton: playerB)
+        universe.random(25, automaton: playerC)
+        universe.random(25, automaton: playerD)
+        universe.random(25, automaton: playerE)
     }
     
     final func update(_ time: TimeInterval, for: SKScene) {
         let delta = times.delta(time)
         if times.tick.timeout(delta) {
-            universe.tick()
+            DispatchQueue.global(qos: .utility).async { [weak self] in
+                self?.universe.tick()
+            }
         }
     }
 }

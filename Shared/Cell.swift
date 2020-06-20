@@ -1,9 +1,9 @@
 import SpriteKit
 
 final class Cell: SKSpriteNode {
-    var alive = false {
+    var player: Player? {
         didSet {
-            run(.colorize(with: alive ? .systemBlue : .clear, colorBlendFactor: 1, duration: 0.3))
+            run(.colorize(with: player?.color ?? .clear, colorBlendFactor: 1, duration: 0.3))
         }
     }
     
