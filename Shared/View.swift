@@ -5,7 +5,6 @@ import Combine
 final class View: SKView, SKViewDelegate {
     var times = Times()
     
-    private weak var pausedBanner: Paused?
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let universe = Universe(size: 25)
@@ -33,11 +32,6 @@ final class View: SKView, SKViewDelegate {
         scene.camera = camera
         presentScene(scene)
         
-        let pausedBanner = Paused()
-        pausedBanner.isHidden = true
-        scene.addChild(pausedBanner)
-        self.pausedBanner = pausedBanner
-        
         let delta = (CGFloat(universe.size) / 2) * 12
         cells = (0 ..< universe.size).map { x in
             (0 ..< universe.size).map { y in
@@ -57,11 +51,6 @@ final class View: SKView, SKViewDelegate {
         universe.random(25, automaton: playerC)
         universe.random(25, automaton: playerD)
         universe.random(25, automaton: playerE)
-    }
-    
-    func pause(_ paused: Bool) {
-        pausedBanner?.isHidden = !paused
-        isPaused = paused
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {

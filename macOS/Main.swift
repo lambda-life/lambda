@@ -3,6 +3,7 @@ import AppKit
 final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     private weak var view: View!
+    private weak var paused: NSView?
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 600, height: 600), styleMask:
@@ -39,10 +40,32 @@ final class Main: NSWindow, NSWindowDelegate {
     }
     
     func windowDidBecomeKey(_: Notification) {
-        view.pause(false)
+        paused?.removeFromSuperview()
+        view.isPaused = false
     }
     
     func windowDidResignKey(_: Notification) {
-        view.pause(true)
+        view.isPaused = true
+        
+        let paused = NSView()
+        paused.translatesAutoresizingMaskIntoConstraints = false
+        paused.wantsLayer = true
+        paused.layer!.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.9).cgColor
+        paused.layer!.cornerRadius = 20
+        self.paused = paused
+        
+        let title = Label(.key("Paused"), .bold(2))
+        title.textColor = .secondaryLabelColor
+        paused.addSubview(title)
+        
+        view.addSubview(paused)
+        
+        paused.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        paused.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        paused.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        paused.rightAnchor.constraint(equalTo: title.rightAnchor, constant: 20).isActive = true
+        
+        title.centerYAnchor.constraint(equalTo: paused.centerYAnchor).isActive = true
+        title.leftAnchor.constraint(equalTo: paused.leftAnchor, constant: 20).isActive = true
     }
 }
