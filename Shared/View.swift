@@ -39,7 +39,7 @@ final class View: SKView, SKSceneDelegate {
             }
         }
         
-        universe.cell.sink { [weak self] in
+        universe.cell.receive(on: DispatchQueue.global(qos: .utility)).sink { [weak self] in
             self?.cells[$0.1.x][$0.1.y].player = $0.0 as? Player
         }.store(in: &subs)
         

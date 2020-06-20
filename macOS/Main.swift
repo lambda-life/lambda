@@ -2,6 +2,7 @@ import AppKit
 
 final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
+    private weak var view: View!
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 600, height: 600), styleMask:
@@ -14,7 +15,11 @@ final class Main: NSWindow, NSWindowDelegate {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
-        contentView = View()
+        
+        let view = View()
+        contentView = view
+        self.view = view
+        
         if !setFrameUsingName(frameAutosaveName) {
             center()
         }
@@ -31,5 +36,15 @@ final class Main: NSWindow, NSWindowDelegate {
 
     func windowDidResize(_: Notification) {
         saveFrame(usingName: frameAutosaveName)
+    }
+    
+    override func becomeKey() {
+        super.becomeKey()
+        view.isPaused = false
+    }
+    
+    override func resignKey() {
+        super.resignKey()
+        view.isPaused = true
     }
 }
