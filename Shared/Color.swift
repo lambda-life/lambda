@@ -3,7 +3,7 @@ import AppKit
 
 extension NSColor {
     static let primaryText = NSColor.labelColor
-    static let fadeBackground = NSColor.unemphasizedSelectedTextBackgroundColor
+    static let fadeBackground = NSColor.underPageBackgroundColor
 }
 #endif
 #if os(iOS)

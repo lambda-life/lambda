@@ -5,6 +5,7 @@ import Combine
 final class View: SKView, SKViewDelegate {
     var times = Times()
     
+    private weak var generation: Generation!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let universe = Universe(size: 25)
@@ -29,6 +30,12 @@ final class View: SKView, SKViewDelegate {
         scene.physicsWorld.gravity = .zero
         
         let camera = SKCameraNode()
+        
+        let generation = Generation()
+        camera.addChild(generation)
+        self.generation = generation
+        
+        scene.addChild(camera)
         scene.camera = camera
         presentScene(scene)
         
@@ -42,8 +49,12 @@ final class View: SKView, SKViewDelegate {
             }
         }
         
-        universe.cell.receive(on: DispatchQueue.global(qos: .utility)).sink { [weak self] in
+        universe.cell.sink { [weak self] in
             self?.cells[$0.1.x][$0.1.y].player = $0.0 as? Player
+        }.store(in: &subs)
+        
+        universe.generation.sink {
+            generation.label.text = "\($0)"
         }.store(in: &subs)
         
         universe.random(25, automaton: playerA)
@@ -56,10 +67,12 @@ final class View: SKView, SKViewDelegate {
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
         let delta = times.delta(time)
         if times.tick.timeout(delta) {
-            DispatchQueue.global(qos: .utility).async { [weak self] in
-                self?.universe.tick()
-            }
+            universe.tick()
         }
         return true
+    }
+    
+    func align() {
+        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 30, y: ((scene!.frame.height - 28) / -2) + 30)
     }
 }

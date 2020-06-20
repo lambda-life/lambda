@@ -39,12 +39,12 @@ final class Main: NSWindow, NSWindowDelegate {
         saveFrame(usingName: frameAutosaveName)
     }
     
-    func windowDidBecomeKey(_: Notification) {
+    func windowDidBecomeMain(_: Notification) {
         paused?.removeFromSuperview()
         view.isPaused = false
     }
     
-    func windowDidResignKey(_: Notification) {
+    func windowDidResignMain(_: Notification) {
         view.isPaused = true
         
         let paused = NSView()
