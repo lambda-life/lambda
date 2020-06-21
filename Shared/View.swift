@@ -10,10 +10,6 @@ final class View: SKView, SKViewDelegate {
     private var subs = Set<AnyCancellable>()
     private let universe = Universe(size: 25)
     private let playerA = Player(color: .systemBlue)
-    private let playerB = Player(color: .systemPink)
-    private let playerC = Player(color: .systemPurple)
-    private let playerD = Player(color: .systemIndigo)
-    private let playerE = Player(color: .systemOrange)
     
     required init?(coder: NSCoder) { nil }
     init() {
@@ -26,7 +22,6 @@ final class View: SKView, SKViewDelegate {
         let scene = SKScene()
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
         scene.scaleMode = .resizeFill
-        scene.backgroundColor = .controlBackgroundColor
         scene.physicsWorld.gravity = .zero
         
         let camera = SKCameraNode()
@@ -38,6 +33,9 @@ final class View: SKView, SKViewDelegate {
         scene.addChild(camera)
         scene.camera = camera
         presentScene(scene)
+        
+        let circle = Circle()
+        camera.addChild(circle)
         
         let delta = (CGFloat(universe.size) / 2) * 12
         cells = (0 ..< universe.size).map { x in
@@ -57,13 +55,7 @@ final class View: SKView, SKViewDelegate {
             generation.count = $0
         }.store(in: &subs)
         
-        universe.random(25, automaton: playerA)
-        universe.random(25, automaton: playerB)
-        universe.random(25, automaton: playerC)
-        universe.random(25, automaton: playerD)
-        universe.random(25, automaton: playerE)
-        
-        
+        universe.random(100, automaton: playerA)
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
@@ -75,6 +67,6 @@ final class View: SKView, SKViewDelegate {
     }
     
     func align() {
-        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 20, y: ((scene!.frame.height - 28) / 2) - 40)
+        generation.position = CGPoint(x: ((scene!.frame.width - generation.frame.width) / -2) + 20, y: ((scene!.frame.height - generation.frame.height) / 2) - 40)
     }
 }
