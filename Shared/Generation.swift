@@ -17,7 +17,7 @@ final class Generation: SKShapeNode {
         zPosition = 100
         fillColor = .fadeBackground
         path = .init(roundedRect: .init(x: -44, y: -14, width: 86, height: 28), cornerWidth: 14, cornerHeight: 14, transform: nil)
-        position = .init(x: -80, y: -190)
+        position = .init(x: -80, y: -200)
         formatter.numberStyle = .decimal
         
         let label = SKLabelNode()

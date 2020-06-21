@@ -1,4 +1,5 @@
 import Foundation
+import CoreGraphics
 
 protocol State {
     var view: View! { get }
@@ -6,16 +7,17 @@ protocol State {
     init(view: View)
     
     func render(_ time: TimeInterval)
-    func add()
+    func touch(_ point: CGPoint)
 }
 
 extension State {
     func render(_ time: TimeInterval) { }
-    func add() { }
+    func touch(_ point: CGPoint) { }
 }
 
 struct Playing: State {
     private(set) weak var view: View!
+    private let addRect = CGRect(x: -35, y: -235, width: 70, height: 70)
     
     init(view: View) {
         self.view = view
@@ -28,8 +30,9 @@ struct Playing: State {
         }
     }
     
-    func add() {
-        
+    func touch(_ point: CGPoint) {
+        guard addRect.contains(point) else { return }
+        view.startAdd()
     }
 }
 

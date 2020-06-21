@@ -8,6 +8,7 @@ final class View: SKView, SKViewDelegate {
     let universe = Universe(size: 25)
     
     private weak var generation: Generation!
+    private weak var add: Circle!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let playerA = Player(color: .systemBlue)
@@ -37,8 +38,9 @@ final class View: SKView, SKViewDelegate {
         presentScene(scene)
         
         let add = Circle(texture: "plus")
-        add.position.y = -190
+        add.position.y = -200
         camera.addChild(add)
+        self.add = add
         
         let delta = ((CGFloat(universe.size) / 2) * 12) - 6
         cells = (0 ..< universe.size).map { x in
@@ -59,6 +61,11 @@ final class View: SKView, SKViewDelegate {
         }.store(in: &subs)
         
         universe.random(100, automaton: playerA)
+    }
+    
+    func startAdd() {
+        state = Adding(view: self)
+        add.selected = true
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
