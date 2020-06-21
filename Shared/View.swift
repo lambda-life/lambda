@@ -54,7 +54,7 @@ final class View: SKView, SKViewDelegate {
         }.store(in: &subs)
         
         universe.generation.sink {
-            generation.label.text = "\($0)"
+            generation.count = $0
         }.store(in: &subs)
         
         universe.random(25, automaton: playerA)
