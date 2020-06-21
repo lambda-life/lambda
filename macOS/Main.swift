@@ -17,8 +17,20 @@ final class Main: NSWindow, NSWindowDelegate {
         isReleasedWhenClosed = false
         
         let view = View()
-        contentView = view
+        contentView!.addSubview(view)
         self.view = view
+        
+        let add = Circle(icon: "plus")
+        add.target = self
+        add.action = #selector(touchAdd)
+        contentView!.addSubview(add)
+        view.add = add
+        
+        view.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        view.centerYAnchor.constraint(equalTo: contentView!.centerYAnchor).isActive = true
+        
+        add.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        add.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 30).isActive = true
         
         if !setFrameUsingName(frameAutosaveName) {
             center()
@@ -36,5 +48,9 @@ final class Main: NSWindow, NSWindowDelegate {
 
     func windowDidResize(_: Notification) {
         saveFrame(usingName: frameAutosaveName)
+    }
+    
+    @objc private func touchAdd() {
+        view.state.add()
     }
 }

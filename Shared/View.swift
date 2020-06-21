@@ -7,8 +7,8 @@ final class View: SKView, SKViewDelegate {
     var times = Times()
     let universe = Universe(size: 25)
     
+    weak var add: Circle!
     private weak var generation: Generation!
-    private weak var add: Circle!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let playerA = Player(color: .systemBlue)
@@ -16,9 +16,14 @@ final class View: SKView, SKViewDelegate {
     required init?(coder: NSCoder) { nil }
     init() {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
         ignoresSiblingOrder = true
         delegate = self
         preferredFramesPerSecond = 3
+        
+        widthAnchor.constraint(equalToConstant: 300).isActive = true
+        heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
         state = Playing(view: self)
         
         let scene = SKScene()
@@ -36,11 +41,6 @@ final class View: SKView, SKViewDelegate {
         scene.addChild(camera)
         scene.camera = camera
         presentScene(scene)
-        
-        let add = Circle(texture: "plus")
-        add.position.y = -200
-        camera.addChild(add)
-        self.add = add
         
         let delta = ((CGFloat(universe.size) / 2) * 12) - 6
         cells = (0 ..< universe.size).map { x in
@@ -61,11 +61,6 @@ final class View: SKView, SKViewDelegate {
         }.store(in: &subs)
         
         universe.random(100, automaton: playerA)
-    }
-    
-    func startAdd() {
-        state = Adding(view: self)
-        add.selected = true
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {

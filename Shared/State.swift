@@ -8,11 +8,13 @@ protocol State {
     
     func render(_ time: TimeInterval)
     func touch(_ point: CGPoint)
+    func add()
 }
 
 extension State {
     func render(_ time: TimeInterval) { }
     func touch(_ point: CGPoint) { }
+    func add() { }
 }
 
 struct Playing: State {
@@ -30,9 +32,9 @@ struct Playing: State {
         }
     }
     
-    func touch(_ point: CGPoint) {
-        guard addRect.contains(point) else { return }
-        view.startAdd()
+    func add() {
+        view.state = Adding(view: view)
+        view.add.selected = true
     }
 }
 
