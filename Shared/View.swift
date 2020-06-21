@@ -3,12 +3,13 @@ import Automata
 import Combine
 
 final class View: SKView, SKViewDelegate {
+    var state: State!
     var times = Times()
+    let universe = Universe(size: 25)
     
     private weak var generation: Generation!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
-    private let universe = Universe(size: 25)
     private let playerA = Player(color: .systemBlue)
     
     required init?(coder: NSCoder) { nil }
@@ -17,6 +18,7 @@ final class View: SKView, SKViewDelegate {
         ignoresSiblingOrder = true
         delegate = self
         preferredFramesPerSecond = 3
+        state = Playing(view: self)
         
         let scene = SKScene()
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
@@ -60,10 +62,7 @@ final class View: SKView, SKViewDelegate {
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
-        let delta = times.delta(time)
-        if times.tick.timeout(delta) {
-            universe.tick()
-        }
+        state.render(time)
         return true
     }
 }
