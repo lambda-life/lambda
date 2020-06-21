@@ -3,7 +3,7 @@ import SpriteKit
 final class Cell: SKSpriteNode {
     var player: Player? {
         didSet {
-            run(.colorize(with: player?.color ?? .clear, colorBlendFactor: 1, duration: 0.3))
+            color = player?.color ?? .clear
         }
     }
     

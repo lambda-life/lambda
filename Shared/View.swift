@@ -62,6 +62,8 @@ final class View: SKView, SKViewDelegate {
         universe.random(25, automaton: playerC)
         universe.random(25, automaton: playerD)
         universe.random(25, automaton: playerE)
+        
+        
     }
     
     func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
@@ -73,6 +75,6 @@ final class View: SKView, SKViewDelegate {
     }
     
     func align() {
-        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 30, y: ((scene!.frame.height - 28) / -2) + 30)
+        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 30, y: ((scene!.frame.height - 28) / 2) - 30)
     }
 }
