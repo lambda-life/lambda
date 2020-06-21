@@ -75,6 +75,6 @@ final class View: SKView, SKViewDelegate {
     }
     
     func align() {
-        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 30, y: ((scene!.frame.height - 28) / 2) - 30)
+        generation.position = .init(x: ((scene!.frame.width - 80) / -2) + 20, y: ((scene!.frame.height - 28) / 2) - 40)
     }
 }
