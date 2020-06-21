@@ -1,13 +1,22 @@
 import SpriteKit
 
-final class Circle: SKShapeNode {
+final class Circle: SKNode {
     required init?(coder: NSCoder) { nil }
-    override init() {
+    init(texture: String) {
         super.init()
-        lineWidth = 5
-        strokeColor = .shadow
         zPosition = 200
-        fillColor = .background
-        path = .init(ellipseIn: .init(x: -20, y: -20, width: 40, height: 40), transform: nil)
+        
+        let shadow = SKSpriteNode(imageNamed: "shadow")
+        addChild(shadow)
+        
+        let circle = SKSpriteNode(imageNamed: "circle")
+        circle.color = .background
+        circle.colorBlendFactor = 1
+        addChild(circle)
+        
+        let texture = SKSpriteNode(imageNamed: texture)
+        texture.color = .primaryText
+        texture.colorBlendFactor = 1
+        addChild(texture)
     }
 }

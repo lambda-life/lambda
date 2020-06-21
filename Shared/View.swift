@@ -17,12 +17,12 @@ final class View: SKView, SKViewDelegate {
         ignoresSiblingOrder = true
         delegate = self
         preferredFramesPerSecond = 3
-        showsFPS = true
         
         let scene = SKScene()
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
         scene.scaleMode = .resizeFill
         scene.physicsWorld.gravity = .zero
+        scene.backgroundColor = .background
         
         let camera = SKCameraNode()
         
@@ -34,10 +34,11 @@ final class View: SKView, SKViewDelegate {
         scene.camera = camera
         presentScene(scene)
         
-        let circle = Circle()
-        camera.addChild(circle)
+        let add = Circle(texture: "plus")
+        add.position.y = -190
+        camera.addChild(add)
         
-        let delta = (CGFloat(universe.size) / 2) * 12
+        let delta = ((CGFloat(universe.size) / 2) * 12) - 6
         cells = (0 ..< universe.size).map { x in
             (0 ..< universe.size).map { y in
                 let cell = Cell(radius: 5)
@@ -64,9 +65,5 @@ final class View: SKView, SKViewDelegate {
             universe.tick()
         }
         return true
-    }
-    
-    func align() {
-        generation.position = CGPoint(x: ((scene!.frame.width - generation.frame.width) / -2) + 20, y: ((scene!.frame.height - generation.frame.height) / 2) - 40)
     }
 }

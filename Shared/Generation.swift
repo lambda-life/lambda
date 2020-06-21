@@ -17,6 +17,7 @@ final class Generation: SKShapeNode {
         zPosition = 100
         fillColor = .fadeBackground
         path = .init(roundedRect: .init(x: -44, y: -14, width: 86, height: 28), cornerWidth: 14, cornerHeight: 14, transform: nil)
+        position = .init(x: -80, y: -190)
         formatter.numberStyle = .decimal
         
         let label = SKLabelNode()
@@ -31,6 +32,7 @@ final class Generation: SKShapeNode {
         
         let icon = SKSpriteNode(imageNamed: "clock")
         icon.color = .primaryText
+        icon.colorBlendFactor = 1
         icon.position.x = -25
         addChild(icon)
         self.label = label
