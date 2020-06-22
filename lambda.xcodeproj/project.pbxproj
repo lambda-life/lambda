@@ -12,7 +12,6 @@
 		CE684353249E212800814744 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684352249E212800814744 /* Font.swift */; };
 		CE684357249E22BC00814744 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684356249E22BC00814744 /* Color.swift */; };
 		CE684359249E2F5C00814744 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684358249E2F5C00814744 /* Label.swift */; };
-		CE68435B249E32FD00814744 /* Generation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68435A249E32FD00814744 /* Generation.swift */; };
 		CE82273E249F986300404B11 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82273D249F986300404B11 /* Circle.swift */; };
 		CE822740249FAAE800404B11 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82273F249FAAE800404B11 /* State.swift */; };
 		CE822742249FB5C000404B11 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE822741249FB5C000404B11 /* Control.swift */; };
@@ -38,7 +37,6 @@
 		CE684352249E212800814744 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE684356249E22BC00814744 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE684358249E2F5C00814744 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
-		CE68435A249E32FD00814744 /* Generation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generation.swift; sourceTree = "<group>"; };
 		CE82273D249F986300404B11 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		CE82273F249FAAE800404B11 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CE822741249FB5C000404B11 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				CED98473249C9B500095C78A /* Cell.swift */,
 				CE684356249E22BC00814744 /* Color.swift */,
 				CE684352249E212800814744 /* Font.swift */,
-				CE68435A249E32FD00814744 /* Generation.swift */,
 				CE684350249E098D00814744 /* Player.swift */,
 				CE82273F249FAAE800404B11 /* State.swift */,
 				CED98467249C920E0095C78A /* String.swift */,
@@ -201,7 +198,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE684351249E098D00814744 /* Player.swift in Sources */,
-				CE68435B249E32FD00814744 /* Generation.swift in Sources */,
 				CED98472249C96E20095C78A /* Times.swift in Sources */,
 				CE684359249E2F5C00814744 /* Label.swift in Sources */,
 				CE684353249E212800814744 /* Font.swift in Sources */,

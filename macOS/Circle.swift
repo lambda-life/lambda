@@ -50,7 +50,7 @@ final class Circle: Control {
     
     func update() {
         drop.isHidden = selected
-        circle.contentTintColor = selected ? .underPageBackgroundColor : .background
+        circle.contentTintColor = selected ? .underPageBackgroundColor : .windowBackgroundColor
         icon.contentTintColor = selected ? .tertiaryLabelColor : .labelColor
     }
     

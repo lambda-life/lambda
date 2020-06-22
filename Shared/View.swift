@@ -8,7 +8,6 @@ final class View: SKView, SKViewDelegate {
     let universe = Universe(size: 25)
     
     weak var add: Circle!
-    private weak var generation: Generation!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let playerA = Player(color: .systemBlue)
@@ -21,25 +20,14 @@ final class View: SKView, SKViewDelegate {
         delegate = self
         preferredFramesPerSecond = 3
         
-        widthAnchor.constraint(equalToConstant: 300).isActive = true
-        heightAnchor.constraint(equalToConstant: 300).isActive = true
+        heightAnchor.constraint(equalToConstant: 340).isActive = true
         
         state = Playing(view: self)
         
         let scene = SKScene()
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
         scene.scaleMode = .resizeFill
-        scene.physicsWorld.gravity = .zero
         scene.backgroundColor = .background
-        
-        let camera = SKCameraNode()
-        
-        let generation = Generation()
-        camera.addChild(generation)
-        self.generation = generation
-        
-        scene.addChild(camera)
-        scene.camera = camera
         presentScene(scene)
         
         let delta = ((CGFloat(universe.size) / 2) * 12) - 6
@@ -54,10 +42,6 @@ final class View: SKView, SKViewDelegate {
         
         universe.cell.sink { [weak self] in
             self?.cells[$0.1.x][$0.1.y].player = $0.0 as? Player
-        }.store(in: &subs)
-        
-        universe.generation.sink {
-            generation.count = $0
         }.store(in: &subs)
         
         universe.random(100, automaton: playerA)

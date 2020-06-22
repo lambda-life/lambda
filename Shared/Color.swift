@@ -2,9 +2,7 @@
 import AppKit
 
 extension NSColor {
-    static let primaryText = NSColor.labelColor
-    static let fadeBackground = NSColor.controlHighlightColor
-    static let background = NSColor.windowBackgroundColor
+    static let background = NSColor.controlBackgroundColor
 }
 #endif
 #if os(iOS)
