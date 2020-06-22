@@ -1,8 +1,10 @@
 import AppKit
+import Combine
 
 final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     private weak var view: View!
+    private var subs = Set<AnyCancellable>()
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 800, height: 800), styleMask:
@@ -16,6 +18,9 @@ final class Main: NSWindow, NSWindowDelegate {
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
         
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        
         let view = View()
         contentView!.addSubview(view)
         self.view = view
@@ -25,6 +30,16 @@ final class Main: NSWindow, NSWindowDelegate {
         border.wantsLayer = true
         border.layer!.backgroundColor = NSColor.controlDarkShadowColor.cgColor
         contentView!.addSubview(border)
+        
+        let clock = NSImageView(image: NSImage(named: "clock")!)
+        clock.translatesAutoresizingMaskIntoConstraints = false
+        clock.imageScaling = .scaleNone
+        clock.contentTintColor = .secondaryLabelColor
+        contentView!.addSubview(clock)
+        
+        let generation = Label("", .monospaced(.bold()))
+        generation.textColor = .secondaryLabelColor
+        contentView!.addSubview(generation)
         
         let add = Circle(icon: "plus")
         add.target = self
@@ -41,6 +56,12 @@ final class Main: NSWindow, NSWindowDelegate {
         border.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         border.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
+        clock.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 20).isActive = true
+        clock.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
+        
+        generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
+        generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        
         add.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
         add.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 40).isActive = true
         
@@ -48,6 +69,10 @@ final class Main: NSWindow, NSWindowDelegate {
             center()
         }
         delegate = self
+        
+        view.universe.generation.sink {
+            generation.stringValue = formatter.string(from: .init(value: $0))!
+        }.store(in: &subs)
     }
     
     override func close() {

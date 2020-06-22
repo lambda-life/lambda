@@ -47,8 +47,8 @@ final class View: SKView, SKViewDelegate {
         universe.random(100, automaton: playerA)
     }
     
-    func view(_: SKView, shouldRenderAtTime time: TimeInterval) -> Bool {
-        state.render(time)
+    func view(_: SKView, shouldRenderAtTime: TimeInterval) -> Bool {
+        state.render(shouldRenderAtTime)
         return true
     }
 }
