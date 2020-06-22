@@ -20,7 +20,7 @@ final class View: SKView, SKViewDelegate {
         delegate = self
         preferredFramesPerSecond = 3
         
-        heightAnchor.constraint(equalToConstant: 340).isActive = true
+        heightAnchor.constraint(equalToConstant: 360).isActive = true
         
         state = Playing(view: self)
         
@@ -34,7 +34,7 @@ final class View: SKView, SKViewDelegate {
         cells = (0 ..< universe.size).map { x in
             (0 ..< universe.size).map { y in
                 let cell = Cell(radius: 5)
-                cell.position = .init(x: .init(x * 12) - delta, y: .init(y * 12) - delta)
+                cell.position = .init(x: .init(x * 12) - delta, y: .init(y * 12) - delta - 10)
                 scene.addChild(cell)
                 return cell
             }
