@@ -20,8 +20,11 @@ final class Main: NSWindow, NSWindowDelegate {
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
+        let decimal = NumberFormatter()
+        decimal.numberStyle = .decimal
+        
+        let percentage = NumberFormatter()
+        percentage.numberStyle = .percent
         
         let view = View()
         view.universe.random(100, automaton: player)
@@ -40,9 +43,21 @@ final class Main: NSWindow, NSWindowDelegate {
         clock.contentTintColor = .secondaryLabelColor
         contentView!.addSubview(clock)
         
+        let square = NSView()
+        square.translatesAutoresizingMaskIntoConstraints = false
+        square.wantsLayer = true
+        square.layer!.borderColor = NSColor.underPageBackgroundColor.cgColor
+        square.layer!.borderWidth = 1
+        square.layer!.backgroundColor = player.color.cgColor
+        contentView!.addSubview(square)
+        
         let generation = Label("", .monospaced(.bold()))
         generation.textColor = .secondaryLabelColor
         contentView!.addSubview(generation)
+        
+        let percent = Label("", .monospaced(.bold()))
+        percent.textColor = .secondaryLabelColor
+        contentView!.addSubview(percent)
         
         let plus = Circle(icon: "plus")
         plus.target = self
@@ -62,8 +77,16 @@ final class Main: NSWindow, NSWindowDelegate {
         clock.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 20).isActive = true
         clock.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
         
+        square.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        square.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        square.widthAnchor.constraint(equalToConstant: 14).isActive = true
+        square.heightAnchor.constraint(equalTo: square.widthAnchor).isActive = true
+        
         generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
         generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        
+        percent.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        percent.leftAnchor.constraint(equalTo: square.rightAnchor, constant: 3).isActive = true
         
         plus.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
         plus.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 75).isActive = true
@@ -73,8 +96,10 @@ final class Main: NSWindow, NSWindowDelegate {
         }
         delegate = self
         
-        view.universe.generation.sink {
-            generation.stringValue = formatter.string(from: .init(value: $0))!
+        view.universe.generation.sink { [weak self] in
+            guard let self = self else { return }
+            generation.stringValue = decimal.string(from: .init(value: $0))!
+            percent.stringValue = percentage.string(from: .init(value: view.universe.percent(self.player)))!
         }.store(in: &subs)
     }
     
