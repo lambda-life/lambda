@@ -18,7 +18,7 @@ struct Times {
         }
     }
     
-    var tick = Item(0.5)
+    var tick = Item(1)
     private var last = TimeInterval()
     
     mutating func delta(_ time: TimeInterval) -> TimeInterval {

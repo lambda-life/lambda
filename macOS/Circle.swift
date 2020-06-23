@@ -3,6 +3,7 @@ import AppKit
 final class Circle: Control {
     var selected = false {
         didSet {
+            enabled = !selected
             update()
         }
     }

@@ -34,7 +34,6 @@ struct Playing: State {
     
     func add() {
         view.state = Adding(view: view)
-        view.add.selected = true
     }
 }
 

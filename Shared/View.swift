@@ -7,7 +7,6 @@ final class View: SKView, SKViewDelegate {
     var times = Times()
     let universe = Universe(size: 25)
     
-    weak var add: Circle!
     private var cells = [[Cell]]()
     private var subs = Set<AnyCancellable>()
     private let playerA = Player(color: .systemBlue)
@@ -18,7 +17,6 @@ final class View: SKView, SKViewDelegate {
         translatesAutoresizingMaskIntoConstraints = false
         ignoresSiblingOrder = true
         delegate = self
-        preferredFramesPerSecond = 3
         
         heightAnchor.constraint(equalToConstant: 360).isActive = true
         

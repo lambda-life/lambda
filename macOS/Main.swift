@@ -4,6 +4,7 @@ import Combine
 final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     private weak var view: View!
+    private weak var add: Circle!
     private var subs = Set<AnyCancellable>()
     
     init() {
@@ -45,7 +46,7 @@ final class Main: NSWindow, NSWindowDelegate {
         add.target = self
         add.action = #selector(touchAdd)
         contentView!.addSubview(add)
-        view.add = add
+        self.add = add
         
         view.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
@@ -89,5 +90,6 @@ final class Main: NSWindow, NSWindowDelegate {
     
     @objc private func touchAdd() {
         view.state.add()
+        add.selected = true
     }
 }
