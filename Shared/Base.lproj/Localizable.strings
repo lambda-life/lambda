@@ -1,3 +1,6 @@
+Loading = "Loading...";
+Ready = "Ready";
+Add = "Add";
 
 Lambda = "Lambda";
 About = "About";

@@ -4,8 +4,9 @@ import Combine
 final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     private weak var view: View!
-    private weak var add: Circle!
+    private weak var plus: Circle!
     private var subs = Set<AnyCancellable>()
+    private let player = Player(color: .systemBlue)
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 800, height: 800), styleMask:
@@ -23,6 +24,7 @@ final class Main: NSWindow, NSWindowDelegate {
         formatter.numberStyle = .decimal
         
         let view = View()
+        view.universe.random(100, automaton: player)
         contentView!.addSubview(view)
         self.view = view
         
@@ -42,11 +44,11 @@ final class Main: NSWindow, NSWindowDelegate {
         generation.textColor = .secondaryLabelColor
         contentView!.addSubview(generation)
         
-        let add = Circle(icon: "plus")
-        add.target = self
-        add.action = #selector(touchAdd)
-        contentView!.addSubview(add)
-        self.add = add
+        let plus = Circle(icon: "plus")
+        plus.target = self
+        plus.action = #selector(adding)
+        contentView!.addSubview(plus)
+        self.plus = plus
         
         view.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
@@ -63,8 +65,8 @@ final class Main: NSWindow, NSWindowDelegate {
         generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
         generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         
-        add.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
-        add.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 40).isActive = true
+        plus.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        plus.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 75).isActive = true
         
         if !setFrameUsingName(frameAutosaveName) {
             center()
@@ -88,8 +90,55 @@ final class Main: NSWindow, NSWindowDelegate {
         saveFrame(usingName: frameAutosaveName)
     }
     
-    @objc private func touchAdd() {
+    @objc private func adding() {
         view.state.add()
-        add.selected = true
+        plus.selected = true
+        
+        let add = Add(player: player, view: view)
+        add.close.target = self
+        add.close.action = #selector(cancel)
+        add.button.target = self
+        add.button.action = #selector(accept)
+        contentView!.addSubview(add)
+        
+        add.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        add.centerYAnchor.constraint(equalTo: plus.centerYAnchor).isActive = true
+        contentView!.layoutSubtreeIfNeeded()
+        add.open()
+        
+        NSAnimationContext.runAnimationGroup ({
+            $0.duration = 0.6
+            $0.allowsImplicitAnimation = true
+            backgroundColor = .underPageBackgroundColor
+            contentView!.layoutSubtreeIfNeeded()
+            add.alphaValue = 1
+        }) {
+            add.tick()
+        }
+    }
+    
+    @objc private func cancel(_ close: Button) {
+        let add = close.superview as! Add
+        add.cancel()
+        
+        NSAnimationContext.runAnimationGroup({
+            $0.duration = 0.3
+            $0.allowsImplicitAnimation = true
+            backgroundColor = .windowBackgroundColor
+            contentView!.layoutSubtreeIfNeeded()
+        }) { [weak self] in
+            add.removeFromSuperview()
+            self?.plus.selected = false
+            self?.view.state.cancel()
+        }
+    }
+    
+    @objc private func accept(_ accept: Button) {
+        accept.enabled = false
+        let add = accept.superview as! Add
+        add.sequence.forEach {
+            view.universe.seed($0, automaton: player)
+        }
+        cancel(accept)
     }
 }

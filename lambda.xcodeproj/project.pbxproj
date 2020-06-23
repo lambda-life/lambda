@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE081F0F24A21A8C0047B6AF /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE081F0E24A21A8C0047B6AF /* Button.swift */; };
+		CE081F1124A238B20047B6AF /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE081F1024A238B20047B6AF /* Highlight.swift */; };
 		CE331F78249CA85D001DA622 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE331F77249CA85D001DA622 /* View+.swift */; };
 		CE684351249E098D00814744 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684350249E098D00814744 /* Player.swift */; };
 		CE684353249E212800814744 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684352249E212800814744 /* Font.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE081F0E24A21A8C0047B6AF /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		CE081F1024A238B20047B6AF /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		CE331F77249CA85D001DA622 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		CE331F79249CAAFA001DA622 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE331F7A249CAB0C001DA622 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				CED9845F249C91650095C78A /* Info.plist */,
 				CE93315324A1E9D700D4D876 /* Add.swift */,
 				CED98456249C91650095C78A /* App.swift */,
+				CE081F0E24A21A8C0047B6AF /* Button.swift */,
 				CE82273D249F986300404B11 /* Circle.swift */,
 				CE822741249FB5C000404B11 /* Control.swift */,
 				CE684358249E2F5C00814744 /* Label.swift */,
@@ -113,6 +118,7 @@
 				CED98473249C9B500095C78A /* Cell.swift */,
 				CE684356249E22BC00814744 /* Color.swift */,
 				CE684352249E212800814744 /* Font.swift */,
+				CE081F1024A238B20047B6AF /* Highlight.swift */,
 				CE684350249E098D00814744 /* Player.swift */,
 				CE82273F249FAAE800404B11 /* State.swift */,
 				CED98467249C920E0095C78A /* String.swift */,
@@ -204,6 +210,7 @@
 				CED98472249C96E20095C78A /* Times.swift in Sources */,
 				CE684359249E2F5C00814744 /* Label.swift in Sources */,
 				CE684353249E212800814744 /* Font.swift in Sources */,
+				CE081F1124A238B20047B6AF /* Highlight.swift in Sources */,
 				CED98465249C91EB0095C78A /* Menu.swift in Sources */,
 				CED98474249C9B500095C78A /* Cell.swift in Sources */,
 				CE82273E249F986300404B11 /* Circle.swift in Sources */,
@@ -216,6 +223,7 @@
 				CE93315424A1E9D700D4D876 /* Add.swift in Sources */,
 				CED98468249C920E0095C78A /* String.swift in Sources */,
 				CED98457249C91650095C78A /* App.swift in Sources */,
+				CE081F0F24A21A8C0047B6AF /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,4 +30,8 @@ struct Times {
         last = time
         return delta
     }
+    
+    mutating func reset() {
+        last = 0
+    }
 }

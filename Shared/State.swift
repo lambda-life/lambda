@@ -9,12 +9,14 @@ protocol State {
     func render(_ time: TimeInterval)
     func touch(_ point: CGPoint)
     func add()
+    func cancel()
 }
 
 extension State {
     func render(_ time: TimeInterval) { }
     func touch(_ point: CGPoint) { }
     func add() { }
+    func cancel() { }
 }
 
 struct Playing: State {
@@ -34,6 +36,7 @@ struct Playing: State {
     
     func add() {
         view.state = Adding(view: view)
+        view.times.reset()
     }
 }
 
@@ -42,5 +45,9 @@ struct Adding: State {
     
     init(view: View) {
         self.view = view
+    }
+    
+    func cancel() {
+        view.state = Playing(view: view)
     }
 }
