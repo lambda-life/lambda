@@ -19,7 +19,7 @@ extension NSApplication {
     }
     
     func close() {
-        guard windows.isEmpty else { return }
+        guard windows.count < 2 else { return }
         terminate(nil)
     }
 }

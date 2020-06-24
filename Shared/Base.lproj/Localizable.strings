@@ -1,3 +1,5 @@
+Title = "Game of Life";
+Instructions = "Select your colour and\ncreate a new Automaton";
 Loading = "Loading...";
 Ready = "Ready";
 Add = "Add";
