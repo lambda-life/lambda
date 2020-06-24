@@ -1,8 +1,7 @@
 import AppKit
 import Combine
 
-final class Main: NSWindow, NSWindowDelegate {
-    override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
+final class Main: NSWindow {
     private weak var view: View!
     private weak var plus: Circle!
     private weak var accumulated: Label!
@@ -18,9 +17,8 @@ final class Main: NSWindow, NSWindowDelegate {
     
     init() {
         super.init(contentRect: .init(x: 0, y: 0, width: 340, height: 540), styleMask:
-            [.borderless, .miniaturizable, .resizable, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
+            [.borderless, .miniaturizable, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
-        minSize = .init(width: 340, height: 540)
         titlebarAppearsTransparent = true
         titleVisibility = .hidden
         toolbar = .init()
@@ -117,11 +115,6 @@ final class Main: NSWindow, NSWindowDelegate {
         plus.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
         plus.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 80).isActive = true
         
-        if !setFrameUsingName(frameAutosaveName) {
-            center()
-        }
-        delegate = self
-        
         view.universe.generation.sink { [weak self] in
             guard let self = self else { return }
             self.count = min(self.count + 5, 99)
@@ -134,14 +127,6 @@ final class Main: NSWindow, NSWindowDelegate {
     override func close() {
         super.close()
         NSApp.launch()
-    }
-    
-    func windowDidMove(_: Notification) {
-        saveFrame(usingName: frameAutosaveName)
-    }
-
-    func windowDidResize(_: Notification) {
-        saveFrame(usingName: frameAutosaveName)
     }
     
     @objc private func adding() {
