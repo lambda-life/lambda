@@ -14,6 +14,7 @@
 		CE684353249E212800814744 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684352249E212800814744 /* Font.swift */; };
 		CE684357249E22BC00814744 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684356249E22BC00814744 /* Color.swift */; };
 		CE684359249E2F5C00814744 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684358249E2F5C00814744 /* Label.swift */; };
+		CE73245624A339B7005B563B /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE73245524A339B7005B563B /* Launch.swift */; };
 		CE82273E249F986300404B11 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82273D249F986300404B11 /* Circle.swift */; };
 		CE822740249FAAE800404B11 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82273F249FAAE800404B11 /* State.swift */; };
 		CE822742249FB5C000404B11 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE822741249FB5C000404B11 /* Control.swift */; };
@@ -42,6 +43,7 @@
 		CE684352249E212800814744 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		CE684356249E22BC00814744 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE684358249E2F5C00814744 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		CE73245524A339B7005B563B /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		CE82273D249F986300404B11 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		CE82273F249FAAE800404B11 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		CE822741249FB5C000404B11 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				CE82273D249F986300404B11 /* Circle.swift */,
 				CE822741249FB5C000404B11 /* Control.swift */,
 				CE684358249E2F5C00814744 /* Label.swift */,
+				CE73245524A339B7005B563B /* Launch.swift */,
 				CED98458249C91650095C78A /* Main.swift */,
 				CED98464249C91EB0095C78A /* Menu.swift */,
 				CE331F77249CA85D001DA622 /* View+.swift */,
@@ -217,6 +220,7 @@
 				CE822740249FAAE800404B11 /* State.swift in Sources */,
 				CE822742249FB5C000404B11 /* Control.swift in Sources */,
 				CE684357249E22BC00814744 /* Color.swift in Sources */,
+				CE73245624A339B7005B563B /* Launch.swift in Sources */,
 				CED98459249C91650095C78A /* Main.swift in Sources */,
 				CE331F78249CA85D001DA622 /* View+.swift in Sources */,
 				CED98470249C96A40095C78A /* View.swift in Sources */,

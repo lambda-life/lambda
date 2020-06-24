@@ -27,6 +27,7 @@ final class Main: NSWindow, NSWindowDelegate {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
+        
         decimal.numberStyle = .decimal
         
         let percentage = NumberFormatter()
@@ -131,7 +132,8 @@ final class Main: NSWindow, NSWindowDelegate {
     }
     
     override func close() {
-        NSApp.terminate(nil)
+        super.close()
+        NSApp.launch()
     }
     
     func windowDidMove(_: Notification) {

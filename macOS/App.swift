@@ -9,6 +9,17 @@ import AppKit
     
     func applicationWillFinishLaunching(_: Notification) {
         mainMenu = Menu()
-        Main().makeKeyAndOrderFront(nil)
+        launch()
+    }
+}
+
+extension NSApplication {
+    func launch() {
+        (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
+    }
+    
+    func close() {
+        guard windows.isEmpty else { return }
+        terminate(nil)
     }
 }
