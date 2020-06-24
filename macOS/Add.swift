@@ -11,11 +11,12 @@ final class Add: NSView {
     private weak var view: View!
     private weak var width: NSLayoutConstraint!
     private var index = 0
-    private let count = 10
+    private let count: Int
     
     required init?(coder: NSCoder) { nil }
-    init(player: Player, view: View) {
+    init(player: Player, view: View, count: Int) {
         sequence = view.universe.sequence(count)
+        self.count = count
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         wantsLayer = true
@@ -57,7 +58,7 @@ final class Add: NSView {
         progress.addSublayer(bar)
         self.bar = bar
         
-        let button = Button(text: .key("Add"), background: player.color, foreground: .labelColor)
+        let button = Button(text: .key("Add") + " \(count)", background: player.color, foreground: .labelColor)
         button.enabled = false
         button.alphaValue = 0.4
         addSubview(button)
@@ -74,7 +75,7 @@ final class Add: NSView {
         message.leftAnchor.constraint(equalTo: leftAnchor, constant: 60).isActive = true
         
         button.centerYAnchor.constraint(equalTo: message.centerYAnchor).isActive = true
-        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -60).isActive = true
+        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -50).isActive = true
     }
     
     func open() {
@@ -90,7 +91,7 @@ final class Add: NSView {
         view.scene!.addChild(Highlight(position: view.position(sequence[index])))
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 0.2
+        animation.duration = 0.05
         animation.fromValue = bar.strokeEnd
         animation.toValue = CGFloat(index + 1) / CGFloat(count)
         bar.strokeEnd = animation.toValue as! CGFloat

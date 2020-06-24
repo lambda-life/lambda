@@ -5,11 +5,19 @@ final class Main: NSWindow, NSWindowDelegate {
     override var frameAutosaveName: NSWindow.FrameAutosaveName { "Main" }
     private weak var view: View!
     private weak var plus: Circle!
+    private weak var accumulated: Label!
     private var subs = Set<AnyCancellable>()
     private let player = Player(color: .systemBlue)
+    private let decimal = NumberFormatter()
+    
+    private var count = 0 {
+        didSet {
+            accumulated.stringValue = decimal.string(from: .init(value: count))!
+        }
+    }
     
     init() {
-        super.init(contentRect: .init(x: 0, y: 0, width: 800, height: 800), styleMask:
+        super.init(contentRect: .init(x: 0, y: 0, width: 340, height: 540), styleMask:
             [.borderless, .miniaturizable, .resizable, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
         minSize = .init(width: 340, height: 540)
@@ -19,8 +27,6 @@ final class Main: NSWindow, NSWindowDelegate {
         toolbar!.showsBaselineSeparator = false
         collectionBehavior = .fullScreenNone
         isReleasedWhenClosed = false
-        
-        let decimal = NumberFormatter()
         decimal.numberStyle = .decimal
         
         let percentage = NumberFormatter()
@@ -43,27 +49,40 @@ final class Main: NSWindow, NSWindowDelegate {
         clock.contentTintColor = .secondaryLabelColor
         contentView!.addSubview(clock)
         
-        let square = NSView()
-        square.translatesAutoresizingMaskIntoConstraints = false
-        square.wantsLayer = true
-        square.layer!.borderColor = NSColor.underPageBackgroundColor.cgColor
-        square.layer!.borderWidth = 1
-        square.layer!.backgroundColor = player.color.cgColor
-        contentView!.addSubview(square)
+        let seeds = NSImageView(image: NSImage(named: "seeds")!)
+        seeds.translatesAutoresizingMaskIntoConstraints = false
+        seeds.imageScaling = .scaleNone
+        seeds.contentTintColor = .secondaryLabelColor
+        contentView!.addSubview(seeds)
+        
+        let badge = NSView()
+        badge.translatesAutoresizingMaskIntoConstraints = false
+        badge.wantsLayer = true
+        badge.layer!.borderColor = NSColor.separatorColor.cgColor
+        badge.layer!.borderWidth = 2
+        badge.layer!.backgroundColor = player.color.cgColor
+        badge.layer!.cornerRadius = 13
+        contentView!.addSubview(badge)
         
         let generation = Label("", .monospaced(.bold()))
         generation.textColor = .secondaryLabelColor
         contentView!.addSubview(generation)
         
         let percent = Label("", .monospaced(.bold()))
-        percent.textColor = .secondaryLabelColor
+        percent.textColor = .controlTextColor
         contentView!.addSubview(percent)
         
         let plus = Circle(icon: "plus")
         plus.target = self
         plus.action = #selector(adding)
+        plus.selected = true
         contentView!.addSubview(plus)
         self.plus = plus
+        
+        let accumulated = Label("", .monospaced(.bold()))
+        accumulated.textColor = .secondaryLabelColor
+        contentView!.addSubview(accumulated)
+        self.accumulated = accumulated
         
         view.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
@@ -77,19 +96,25 @@ final class Main: NSWindow, NSWindowDelegate {
         clock.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 20).isActive = true
         clock.leftAnchor.constraint(equalTo: contentView!.leftAnchor, constant: 20).isActive = true
         
-        square.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
-        square.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
-        square.widthAnchor.constraint(equalToConstant: 14).isActive = true
-        square.heightAnchor.constraint(equalTo: square.widthAnchor).isActive = true
+        seeds.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        seeds.rightAnchor.constraint(equalTo: contentView!.rightAnchor, constant: -20).isActive = true
+        
+        badge.rightAnchor.constraint(equalTo: percent.rightAnchor, constant: 14).isActive = true
+        badge.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
+        badge.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        badge.heightAnchor.constraint(equalToConstant: 26).isActive = true
         
         generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
         generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         
-        percent.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
-        percent.leftAnchor.constraint(equalTo: square.rightAnchor, constant: 3).isActive = true
+        accumulated.rightAnchor.constraint(equalTo: seeds.leftAnchor, constant: -3).isActive = true
+        accumulated.centerYAnchor.constraint(equalTo: seeds.centerYAnchor).isActive = true
+        
+        percent.leftAnchor.constraint(equalTo: badge.leftAnchor, constant: 14).isActive = true
+        percent.centerYAnchor.constraint(equalTo: badge.centerYAnchor).isActive = true
         
         plus.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
-        plus.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 75).isActive = true
+        plus.topAnchor.constraint(equalTo: border.bottomAnchor, constant: 80).isActive = true
         
         if !setFrameUsingName(frameAutosaveName) {
             center()
@@ -98,8 +123,10 @@ final class Main: NSWindow, NSWindowDelegate {
         
         view.universe.generation.sink { [weak self] in
             guard let self = self else { return }
-            generation.stringValue = decimal.string(from: .init(value: $0))!
+            self.count = min(self.count + 5, 99)
+            generation.stringValue = self.decimal.string(from: .init(value: $0))!
             percent.stringValue = percentage.string(from: .init(value: view.universe.percent(self.player)))!
+            self.plus.selected = self.count == 0
         }.store(in: &subs)
     }
     
@@ -119,7 +146,7 @@ final class Main: NSWindow, NSWindowDelegate {
         view.state.add()
         plus.selected = true
         
-        let add = Add(player: player, view: view)
+        let add = Add(player: player, view: view, count: count)
         add.close.target = self
         add.close.action = #selector(cancel)
         add.button.target = self
@@ -153,13 +180,13 @@ final class Main: NSWindow, NSWindowDelegate {
             contentView!.layoutSubtreeIfNeeded()
         }) { [weak self] in
             add.removeFromSuperview()
-            self?.plus.selected = false
             self?.view.state.cancel()
         }
     }
     
     @objc private func accept(_ accept: Button) {
         accept.enabled = false
+        count = 0
         let add = accept.superview as! Add
         add.sequence.forEach {
             view.universe.seed($0, automaton: player)
