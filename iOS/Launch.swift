@@ -1,6 +1,9 @@
 import UIKit
 
 final class Launch: UIViewController {
+    private weak var label: UILabel?
+    private weak var instructions: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
@@ -11,12 +14,13 @@ final class Launch: UIViewController {
         logo.clipsToBounds = true
         view.addSubview(logo)
         
-        let title = UILabel()
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = .key("Title")
-        title.font = .bold(12)
-        title.textColor = .systemIndigo
-        view.addSubview(title)
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = .key("Title")
+        label.font = .bold(12)
+        label.textColor = .systemIndigo
+        view.addSubview(label)
+        self.label = label
         
         let instructions = UILabel()
         instructions.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +30,7 @@ final class Launch: UIViewController {
         instructions.numberOfLines = 0
         instructions.textColor = .tertiaryLabel
         view.addSubview(instructions)
+        self.instructions = instructions
         
         let blue = Item(color: .systemBlue)
         blue.target = self
@@ -52,16 +57,21 @@ final class Launch: UIViewController {
         teal.action = #selector(select(item:))
         view.addSubview(teal)
         
+        let create = Button(text: .key("Create"), background: .systemIndigo, foreground: .label)
+        create.target = self
+        create.action = #selector(self.create)
+        view.addSubview(create)
+        
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logo.bottomAnchor.constraint(equalTo: title.topAnchor, constant: -10).isActive = true
+        logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         
-        title.bottomAnchor.constraint(equalTo: instructions.topAnchor, constant: -5).isActive = true
-        title.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50).isActive = true
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        instructions.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        instructions.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
         instructions.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        blue.centerYAnchor.constraint(equalTo: instructions.bottomAnchor, constant: 70).isActive = true
+        blue.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         blue.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         orange.centerYAnchor.constraint(equalTo: blue.centerYAnchor).isActive = true
@@ -76,13 +86,32 @@ final class Launch: UIViewController {
         teal.centerYAnchor.constraint(equalTo: blue.centerYAnchor).isActive = true
         teal.leftAnchor.constraint(equalTo: pink.rightAnchor, constant: 5).isActive = true
         
+        create.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        create.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        
         select(item: blue)
+        update(traitCollection)
+    }
+    
+    override func willTransition(to: UITraitCollection, with: UIViewControllerTransitionCoordinator) {
+        update(to)
+    }
+    
+    private func update(_ trait: UITraitCollection) {
+        label?.isHidden = trait.verticalSizeClass == .compact
+        instructions?.isHidden = trait.verticalSizeClass == .compact
     }
     
     @objc private func select(item: Item) {
         view.subviews.compactMap { $0 as? Item }.forEach {
             $0.enabled = $0 != item
         }
+    }
+    
+    @objc private func create() {
+//        let automaton = Main(color: contentView!.subviews.compactMap { $0 as? Item }.first { !$0.enabled }!.color)
+//        automaton.center()
+//        automaton.makeKeyAndOrderFront(nil)
     }
 }
 
