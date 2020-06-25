@@ -75,7 +75,7 @@ final class Main: NSWindow {
         let plus = Circle(icon: "plus")
         plus.target = self
         plus.action = #selector(adding)
-        plus.selected = true
+        plus.enabled = false
         contentView!.addSubview(plus)
         self.plus = plus
         
@@ -121,7 +121,7 @@ final class Main: NSWindow {
             self.count = min(self.count + 5, 99)
             generation.stringValue = self.decimal.string(from: .init(value: $0))!
             percent.stringValue = percentage.string(from: .init(value: view.universe.percent(self.player)))!
-            self.plus.selected = self.count == 0
+            self.plus.enabled = self.count > 0
         }.store(in: &subs)
     }
     
@@ -132,7 +132,7 @@ final class Main: NSWindow {
     
     @objc private func adding() {
         view.state.add()
-        plus.selected = true
+        plus.enabled = false
         
         let add = Add(player: player, view: view, count: count)
         add.close.target = self

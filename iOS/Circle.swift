@@ -1,4 +1,4 @@
-import AppKit
+import UIKit
 
 final class Circle: Control {
     override var enabled: Bool {
@@ -7,29 +7,32 @@ final class Circle: Control {
         }
     }
     
-    private weak var drop: NSImageView!
-    private weak var circle: NSImageView!
-    private weak var icon: NSImageView!
+    private weak var drop: UIImageView!
+    private weak var circle: UIImageView!
+    private weak var icon: UIImageView!
     
     required init?(coder: NSCoder) { nil }
     init(icon: String) {
         super.init()
         
-        let drop = NSImageView(image: NSImage(named: "shadow")!)
+        let drop = UIImageView(image: UIImage(named: "shadow")!)
         drop.translatesAutoresizingMaskIntoConstraints = false
-        drop.imageScaling = .scaleNone
+        drop.contentMode = .center
+        drop.clipsToBounds = true
         addSubview(drop)
         self.drop = drop
         
-        let circle = NSImageView(image: NSImage(named: "circle")!)
+        let circle = UIImageView(image: UIImage(named: "circle")!)
         circle.translatesAutoresizingMaskIntoConstraints = false
-        circle.imageScaling = .scaleNone
+        circle.contentMode = .center
+        circle.clipsToBounds = true
         addSubview(circle)
         self.circle = circle
         
-        let icon = NSImageView(image: NSImage(named: icon)!)
+        let icon = UIImageView(image: UIImage(named: icon)!)
         icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.imageScaling = .scaleNone
+        icon.contentMode = .center
+        icon.clipsToBounds = true
         addSubview(icon)
         self.icon = icon
         
@@ -50,15 +53,15 @@ final class Circle: Control {
     
     func update() {
         drop.isHidden = !enabled
-        circle.contentTintColor = enabled ? .windowBackgroundColor : .underPageBackgroundColor
-        icon.contentTintColor = enabled ? .labelColor : .tertiaryLabelColor
+        circle.tintColor = enabled ? .systemBackground : .tertiarySystemBackground
+        icon.tintColor = enabled ? .label : .tertiaryLabel
     }
     
     override func hoverOn() {
-        alphaValue = 0.3
+        alpha = 0.3
     }
     
     override func hoverOff() {
-        alphaValue = 1
+        alpha = 1
     }
 }
