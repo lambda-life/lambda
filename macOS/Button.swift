@@ -24,7 +24,7 @@ final class Button: Control {
         layer!.backgroundColor = background.cgColor
         layer!.cornerRadius = 16
         
-        let label = Label(text, .bold(-2))
+        let label = Label(text, .medium())
         label.textColor = foreground
         addSubview(label)
         

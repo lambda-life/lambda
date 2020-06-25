@@ -54,6 +54,11 @@ final class Launch: NSWindow, NSWindowDelegate {
         teal.action = #selector(select(item:))
         contentView!.addSubview(teal)
         
+        let create = Button(text: .key("Create"), background: .systemIndigo, foreground: .controlTextColor)
+        create.target = self
+        create.action = #selector(self.create)
+        contentView!.addSubview(create)
+        
         logo.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
         logo.topAnchor.constraint(equalTo: contentView!.topAnchor, constant: 90).isActive = true
         
@@ -77,6 +82,9 @@ final class Launch: NSWindow, NSWindowDelegate {
         
         teal.centerYAnchor.constraint(equalTo: blue.centerYAnchor).isActive = true
         teal.leftAnchor.constraint(equalTo: pink.rightAnchor, constant: 20).isActive = true
+        
+        create.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
+        create.topAnchor.constraint(equalTo: blue.centerYAnchor, constant: 80).isActive = true
         
         select(item: blue)
         
@@ -104,6 +112,12 @@ final class Launch: NSWindow, NSWindowDelegate {
             $0.enabled = $0 != item
         }
     }
+    
+    @objc private func create() {
+        let automaton = Main(color: contentView!.subviews.compactMap { $0 as? Item }.first { !$0.enabled }!.color)
+        automaton.center()
+        automaton.makeKeyAndOrderFront(nil)
+    }
 }
 
 private final class Item: Control {
@@ -116,11 +130,13 @@ private final class Item: Control {
         }
     }
     
+    let color: NSColor
     private weak var circle: NSView!
     private weak var width: NSLayoutConstraint!
     
     required init?(coder: NSCoder) { nil }
     init(color: NSColor) {
+        self.color = color
         super.init()
         wantsLayer = true
         layer!.cornerRadius = 35

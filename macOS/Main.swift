@@ -6,7 +6,7 @@ final class Main: NSWindow {
     private weak var plus: Circle!
     private weak var accumulated: Label!
     private var subs = Set<AnyCancellable>()
-    private let player = Player(color: .systemBlue)
+    private let player: Player
     private let decimal = NumberFormatter()
     
     private var count = 0 {
@@ -15,7 +15,8 @@ final class Main: NSWindow {
         }
     }
     
-    init() {
+    init(color: NSColor) {
+        player = .init(color: color)
         super.init(contentRect: .init(x: 0, y: 0, width: 340, height: 540), styleMask:
             [.borderless, .miniaturizable, .closable, .titled, .unifiedTitleAndToolbar, .fullSizeContentView],
                    backing: .buffered, defer: false)
