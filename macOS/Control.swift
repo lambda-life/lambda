@@ -28,15 +28,11 @@ class Control: NSView {
         guard enabled else { return }
         window!.makeFirstResponder(self)
         if bounds.contains(convert(with.locationInWindow, from: nil)) {
-            click()
+            _ = target.perform(action, with: self)
         } else {
             super.mouseUp(with: with)
         }
         hoverOff()
-    }
-    
-    func click() {
-        _ = target.perform(action, with: self)
     }
     
     func hoverOn() {

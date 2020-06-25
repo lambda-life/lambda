@@ -139,7 +139,6 @@ private final class Item: Control {
         self.color = color
         super.init()
         wantsLayer = true
-        layer!.cornerRadius = 35
         
         let circle = NSView()
         circle.translatesAutoresizingMaskIntoConstraints = false

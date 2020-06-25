@@ -10,6 +10,7 @@ extension NSColor {
 import UIKit
 
 extension UIColor {
-    
+    static let background = UIColor.systemBackground
+    static let highlight = UIColor.label
 }
 #endif

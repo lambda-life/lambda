@@ -25,6 +25,19 @@
 		CEAAD1A024A4FD530017A9F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAAD19F24A4FD530017A9F1 /* Assets.xcassets */; };
 		CEAAD1A324A4FD530017A9F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAAD1A124A4FD530017A9F1 /* LaunchScreen.storyboard */; };
 		CEAAD1A924A4FF5B0017A9F1 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAD1A824A4FF5B0017A9F1 /* Launch.swift */; };
+		CEAAD1AA24A500710017A9F1 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98473249C9B500095C78A /* Cell.swift */; };
+		CEAAD1AB24A500710017A9F1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684356249E22BC00814744 /* Color.swift */; };
+		CEAAD1AC24A500710017A9F1 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684352249E212800814744 /* Font.swift */; };
+		CEAAD1AD24A500710017A9F1 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE081F1024A238B20047B6AF /* Highlight.swift */; };
+		CEAAD1AE24A500710017A9F1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE684350249E098D00814744 /* Player.swift */; };
+		CEAAD1AF24A500710017A9F1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82273F249FAAE800404B11 /* State.swift */; };
+		CEAAD1B024A500710017A9F1 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98467249C920E0095C78A /* String.swift */; };
+		CEAAD1B124A500710017A9F1 /* Times.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98471249C96E20095C78A /* Times.swift */; };
+		CEAAD1B224A500710017A9F1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED9846F249C96A40095C78A /* View.swift */; };
+		CEAAD1B324A500740017A9F1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE8A050C249D148400C460C6 /* Media.xcassets */; };
+		CEAAD1B424A500780017A9F1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED98469249C92550095C78A /* Localizable.strings */; };
+		CEAAD1B724A5008A0017A9F1 /* Automata in Frameworks */ = {isa = PBXBuildFile; productRef = CEAAD1B624A5008A0017A9F1 /* Automata */; };
+		CEAAD1B924A504870017A9F1 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAAD1B824A504870017A9F1 /* Control.swift */; };
 		CED98457249C91650095C78A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98456249C91650095C78A /* App.swift */; };
 		CED98459249C91650095C78A /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED98458249C91650095C78A /* Main.swift */; };
 		CED9845B249C91650095C78A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED9845A249C91650095C78A /* Assets.xcassets */; };
@@ -61,6 +74,7 @@
 		CEAAD1A224A4FD530017A9F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEAAD1A424A4FD530017A9F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEAAD1A824A4FF5B0017A9F1 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		CEAAD1B824A504870017A9F1 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		CED98453249C91650095C78A /* Lambda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lambda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED98456249C91650095C78A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CED98458249C91650095C78A /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -80,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAAD1B724A5008A0017A9F1 /* Automata in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +114,7 @@
 			children = (
 				CEAAD1A424A4FD530017A9F1 /* Info.plist */,
 				CEAAD19624A4FD530017A9F1 /* App.swift */,
+				CEAAD1B824A504870017A9F1 /* Control.swift */,
 				CEAAD1A824A4FF5B0017A9F1 /* Launch.swift */,
 				CEAAD19824A4FD530017A9F1 /* Scene.swift */,
 				CEAAD19F24A4FD530017A9F1 /* Assets.xcassets */,
@@ -107,12 +123,20 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		CEAAD1B524A5008A0017A9F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CED98448249C91510095C78A = {
 			isa = PBXGroup;
 			children = (
 				CE331F7C249CAB45001DA622 /* .gitignore */,
 				CE331F7A249CAB0C001DA622 /* LICENSE */,
 				CE331F79249CAAFA001DA622 /* README.md */,
+				CEAAD1B524A5008A0017A9F1 /* Frameworks */,
 				CEAAD19524A4FD530017A9F1 /* iOS */,
 				CED98455249C91650095C78A /* macOS */,
 				CED98454249C91650095C78A /* Products */,
@@ -183,6 +207,9 @@
 			dependencies = (
 			);
 			name = iOS;
+			packageProductDependencies = (
+				CEAAD1B624A5008A0017A9F1 /* Automata */,
+			);
 			productName = iOS;
 			productReference = CEAAD19424A4FD530017A9F1 /* Lambda.app */;
 			productType = "com.apple.product-type.application";
@@ -252,6 +279,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEAAD1A324A4FD530017A9F1 /* LaunchScreen.storyboard in Resources */,
+				CEAAD1B424A500780017A9F1 /* Localizable.strings in Resources */,
+				CEAAD1B324A500740017A9F1 /* Media.xcassets in Resources */,
 				CEAAD1A024A4FD530017A9F1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,8 +303,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEAAD19724A4FD530017A9F1 /* App.swift in Sources */,
+				CEAAD1B924A504870017A9F1 /* Control.swift in Sources */,
+				CEAAD1AA24A500710017A9F1 /* Cell.swift in Sources */,
+				CEAAD1B024A500710017A9F1 /* String.swift in Sources */,
+				CEAAD1AD24A500710017A9F1 /* Highlight.swift in Sources */,
+				CEAAD1AC24A500710017A9F1 /* Font.swift in Sources */,
+				CEAAD1AE24A500710017A9F1 /* Player.swift in Sources */,
+				CEAAD1AF24A500710017A9F1 /* State.swift in Sources */,
 				CEAAD1A924A4FF5B0017A9F1 /* Launch.swift in Sources */,
+				CEAAD1B224A500710017A9F1 /* View.swift in Sources */,
+				CEAAD1AB24A500710017A9F1 /* Color.swift in Sources */,
 				CEAAD19924A4FD530017A9F1 /* Scene.swift in Sources */,
+				CEAAD1B124A500710017A9F1 /* Times.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +697,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CEAAD1B624A5008A0017A9F1 /* Automata */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CED9846C249C943C0095C78A /* XCRemoteSwiftPackageReference "automata" */;
+			productName = Automata;
+		};
 		CED9846D249C943C0095C78A /* Automata */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CED9846C249C943C0095C78A /* XCRemoteSwiftPackageReference "automata" */;
