@@ -7,14 +7,12 @@ protocol State {
     init(view: View)
     
     func render(_ time: TimeInterval)
-    func touch(_ point: CGPoint)
     func add()
     func cancel()
 }
 
 extension State {
     func render(_ time: TimeInterval) { }
-    func touch(_ point: CGPoint) { }
     func add() { }
     func cancel() { }
 }
