@@ -109,6 +109,7 @@ final class Launch: UIViewController {
     }
     
     @objc private func create() {
+        present(Main(), animated: true)
 //        let automaton = Main(color: contentView!.subviews.compactMap { $0 as? Item }.first { !$0.enabled }!.color)
 //        automaton.center()
 //        automaton.makeKeyAndOrderFront(nil)
