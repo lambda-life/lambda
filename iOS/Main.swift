@@ -2,14 +2,23 @@ import UIKit
 import Combine
 
 final class Main: UIViewController {
-    private weak var game: View!
+    private(set) weak var game: View!
     private weak var plus: Circle!
     private weak var base: UIView!
     private weak var accumulated: UILabel!
     private weak var border: UIView?
     private var subs = Set<AnyCancellable>()
-    private let player: Player
+    let player: Player
     private let decimal = NumberFormatter()
+    
+    var count = 0 {
+        didSet {
+            UIView.transition(with: accumulated, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
+                guard let self = self else { return }
+                self.accumulated.text = self.decimal.string(from: .init(value: self.count))!
+            })
+        }
+    }
     
     private weak var gameRight: NSLayoutConstraint? {
         didSet {
@@ -36,15 +45,6 @@ final class Main: UIViewController {
         didSet {
             oldValue?.isActive = false
             baseLeft!.isActive = true
-        }
-    }
-    
-    private var count = 0 {
-        didSet {
-            UIView.transition(with: accumulated, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
-                guard let self = self else { return }
-                self.accumulated.text = self.decimal.string(from: .init(value: self.count))!
-            })
         }
     }
     
@@ -210,7 +210,7 @@ final class Main: UIViewController {
     @objc private func adding() {
         game.state.add()
         plus.enabled = false
-        present(Add(player: player, game: game, count: count), animated: true)
+        present(Add(main: self), animated: true)
     }
     
     @objc private func close() {

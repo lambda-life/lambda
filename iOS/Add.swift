@@ -2,25 +2,20 @@ import UIKit
 import Automata
 
 final class Add: UIViewController {
-    private weak var game: View?
-    private weak var player: Player!
+    private weak var main: Main?
     private weak var button: Button!
     private weak var blur: UIVisualEffectView!
-    private weak var bar: CAShapeLayer!
-    private weak var progress: CAShapeLayer!
     private weak var message: UILabel!
+    private weak var barWidth: NSLayoutConstraint!
     private weak var blurLeft: NSLayoutConstraint?
     private weak var blurTop: NSLayoutConstraint?
     private var index = 0
-    private let count: Int
     private let sequence: [Point]
     
     required init?(coder: NSCoder) { nil }
-    init(player: Player, game: View, count: Int) {
-        self.player = player
-        self.game = game
-        self.count = count
-        sequence = game.universe.sequence(count)
+    init(main: Main) {
+        self.main = main
+        sequence = main.game.universe.sequence(main.count)
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overCurrentContext
@@ -51,36 +46,30 @@ final class Add: UIViewController {
         message.translatesAutoresizingMaskIntoConstraints = false
         message.text = .key("Loading")
         message.font = .bold(-2)
-        message.textColor = .tertiaryLabel
+        message.textColor = .secondaryLabel
         blur.contentView.addSubview(message)
         self.message = message
         
-        let progress = CAShapeLayer()
-        progress.lineWidth = 0
-        progress.fillColor = .init(genericGrayGamma2_2Gray: 0, alpha: 0.1)
-        progress.path = .init(roundedRect: .init(x: 50, y: 15, width: 200, height: 20), cornerWidth: 10, cornerHeight: 10, transform: nil)
-        blur.contentView.layer.addSublayer(progress)
-        self.progress = progress
+        let progress = UIView()
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.isUserInteractionEnabled = false
+        progress.backgroundColor = .init(white: 1, alpha: 0.1)
+        progress.layer.cornerRadius = 10
+        progress.clipsToBounds = true
+        blur.contentView.addSubview(progress)
         
-        let bar = CAShapeLayer()
-        bar.lineWidth = 20
-        bar.strokeColor = player.color.cgColor
-        bar.path = {
-            $0.move(to: .init(x: 50, y: 25))
-            $0.addLine(to: .init(x: 250, y: 25))
-            return $0
-        } (CGMutablePath())
-        bar.strokeEnd = 0
-        bar.mask = {
-            $0.path = .init(roundedRect: .init(x: 52, y: 17, width: 196, height: 16), cornerWidth: 8, cornerHeight: 8, transform: nil)
-            return $0
-        } (CAShapeLayer())
-        progress.addSublayer(bar)
-        self.bar = bar
+        let bar = UIView()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.isUserInteractionEnabled = false
+        bar.backgroundColor = main!.player.color
+        bar.layer.cornerRadius = 8
+        progress.addSubview(bar)
         
-        let button = Button(text: .key("Add") + " \(count)", background: player.color, foreground: .label)
+        let button = Button(text: .key("Add") + " \(main!.count)", background: main!.player.color, foreground: .label)
         button.enabled = false
         button.alpha = 0.4
+        button.target = self
+        button.action = #selector(accept)
         blur.contentView.addSubview(button)
         self.button = button
         
@@ -93,11 +82,23 @@ final class Add: UIViewController {
         button.bottomAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
         button.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
         
+        progress.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
+        progress.centerYAnchor.constraint(equalTo: blur.contentView.centerYAnchor).isActive = true
+        progress.widthAnchor.constraint(equalToConstant: 204).isActive = true
+        progress.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        bar.leftAnchor.constraint(equalTo: progress.leftAnchor, constant: 2).isActive = true
+        bar.topAnchor.constraint(equalTo: progress.topAnchor, constant: 2).isActive = true
+        bar.bottomAnchor.constraint(equalTo: progress.bottomAnchor, constant: -2).isActive = true
+        barWidth = bar.widthAnchor.constraint(equalToConstant: 0)
+        barWidth.isActive = true
+        
         update(traitCollection)
+        tick()
     }
     
     private func update(_ trait: UITraitCollection) {
-        guard let game = self.game else { return }
+        guard let game = main?.game else { return }
         if trait.verticalSizeClass == .compact {
             
         } else {
@@ -106,7 +107,42 @@ final class Add: UIViewController {
         }
     }
     
+    private func tick() {
+        main!.game.scene!.addChild(Highlight(position: main!.game!.position(sequence[index])))
+        UIView.animate(withDuration: 0.05) { [weak self] in
+            guard let self = self else { return }
+            self.barWidth.constant = (CGFloat(self.index + 1) / .init(self.main!.count)) * 200
+        }
+        
+        guard index < main!.count - 1 else {
+            ready()
+            return
+        }
+        index += 1
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+            self?.tick()
+        }
+    }
+    
+    private func ready() {
+        button.enabled = true
+        button.alpha = 1
+        message.text = .key("Ready")
+    }
+    
+    @objc private func accept() {
+        main!.count = 0
+        sequence.forEach {
+            main!.game!.universe.seed($0, automaton: main!.player)
+        }
+        close()
+    }
+    
     @objc private func close() {
-        dismiss(animated: true)
+        main!.game!.clear()
+        dismiss(animated: true) { [weak self] in
+            self?.main?.game?.state.cancel()
+        }
     }
 }

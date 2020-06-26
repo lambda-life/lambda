@@ -83,7 +83,7 @@ final class Add: NSView {
     }
     
     func cancel() {
-        view.scene!.children.compactMap { $0 as? Highlight }.forEach { $0.removeFromParent() }
+        view.clear()
         width.constant = 0
     }
     
@@ -93,7 +93,7 @@ final class Add: NSView {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.05
         animation.fromValue = bar.strokeEnd
-        animation.toValue = CGFloat(index + 1) / CGFloat(count)
+        animation.toValue = CGFloat(index + 1) / .init(count)
         bar.strokeEnd = animation.toValue as! CGFloat
         bar.add(animation, forKey: "strokeEnd")
         

@@ -47,4 +47,8 @@ final class View: SKView, SKViewDelegate {
     func position(_ point: Point) -> CGPoint {
         cells[point.x][point.y].position
     }
+    
+    func clear() {
+        scene!.children.compactMap { $0 as? Highlight }.forEach { $0.removeFromParent() }
+    }
 }
