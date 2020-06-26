@@ -76,7 +76,7 @@ final class Add: UIViewController {
         close.topAnchor.constraint(equalTo: blur.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         close.leftAnchor.constraint(equalTo: blur.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
         
-        message.topAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        message.topAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
         message.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
         
         button.bottomAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
@@ -97,10 +97,16 @@ final class Add: UIViewController {
         tick()
     }
     
+    override func willTransition(to: UITraitCollection, with: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: to, with: with)
+        update(to)
+    }
+    
     private func update(_ trait: UITraitCollection) {
         guard let game = main?.game else { return }
         if trait.verticalSizeClass == .compact {
-            
+            blurLeft?.constant = game.frame.maxX + 1
+            blurTop?.constant = 0
         } else {
             blurLeft?.constant = 0
             blurTop?.constant = game.frame.maxY + 1

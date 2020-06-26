@@ -173,6 +173,11 @@ final class Main: UIViewController {
         }.store(in: &subs)
     }
     
+    override func willTransition(to: UITraitCollection, with: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: to, with: with)
+        update(to)
+    }
+    
     private func update(_ trait: UITraitCollection) {
         self.border?.removeFromSuperview()
         let border = UIView()

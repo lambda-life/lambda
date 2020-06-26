@@ -94,6 +94,7 @@ final class Launch: UIViewController {
     }
     
     override func willTransition(to: UITraitCollection, with: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: to, with: with)
         update(to)
     }
     
