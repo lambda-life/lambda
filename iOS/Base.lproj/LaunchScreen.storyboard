@@ -56,7 +56,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dKm-cb-7pR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="0qu-Uy-XQz"/>
                             <constraint firstItem="DzJ-7Q-Mec" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="NLq-aS-735"/>
