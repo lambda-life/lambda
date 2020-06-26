@@ -58,10 +58,8 @@ final class Main: NSWindow {
         let badge = NSView()
         badge.translatesAutoresizingMaskIntoConstraints = false
         badge.wantsLayer = true
-        badge.layer!.borderColor = NSColor.separatorColor.cgColor
-        badge.layer!.borderWidth = 2
         badge.layer!.backgroundColor = player.color.cgColor
-        badge.layer!.cornerRadius = 13
+        badge.layer!.cornerRadius = 6
         contentView!.addSubview(badge)
         
         let generation = Label("", .monospaced(.bold()))
@@ -103,7 +101,7 @@ final class Main: NSWindow {
         badge.rightAnchor.constraint(equalTo: percent.rightAnchor, constant: 14).isActive = true
         badge.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         badge.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
-        badge.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        badge.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
         generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true

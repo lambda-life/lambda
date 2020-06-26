@@ -87,9 +87,7 @@ final class Main: UIViewController {
         badge.translatesAutoresizingMaskIntoConstraints = false
         badge.isUserInteractionEnabled = false
         badge.backgroundColor = player.color
-        badge.layer.borderColor = UIColor.separator.cgColor
-        badge.layer.borderWidth = 2
-        badge.layer.cornerRadius = 13
+        badge.layer.cornerRadius = 6
         base.addSubview(badge)
         
         let generation = UILabel()
@@ -100,7 +98,6 @@ final class Main: UIViewController {
         
         let percent = UILabel()
         percent.translatesAutoresizingMaskIntoConstraints = false
-        percent.textColor = .secondaryLabel
         percent.font = .monospaced(.bold())
         base.addSubview(percent)
         
@@ -118,22 +115,27 @@ final class Main: UIViewController {
         base.addSubview(accumulated)
         self.accumulated = accumulated
         
+        let close = Button(text: .key("Close"), background: .systemPink, foreground: .label)
+        close.target = self
+        close.action = #selector(self.close)
+        base.addSubview(close)
+        
         game.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         game.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         
         base.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         base.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        clock.topAnchor.constraint(equalTo: base.topAnchor, constant: 20).isActive = true
-        clock.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 20).isActive = true
+        clock.topAnchor.constraint(equalTo: base.topAnchor, constant: 30).isActive = true
+        clock.leftAnchor.constraint(equalTo: base.leftAnchor, constant: 30).isActive = true
         
         seeds.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
-        seeds.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -20).isActive = true
+        seeds.rightAnchor.constraint(equalTo: base.rightAnchor, constant: -30).isActive = true
         
-        badge.rightAnchor.constraint(equalTo: percent.rightAnchor, constant: 14).isActive = true
         badge.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         badge.centerXAnchor.constraint(equalTo: base.centerXAnchor).isActive = true
-        badge.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        badge.heightAnchor.constraint(equalToConstant: 34).isActive = true
+        badge.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         generation.leftAnchor.constraint(equalTo: clock.rightAnchor, constant: 3).isActive = true
         generation.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
@@ -141,11 +143,14 @@ final class Main: UIViewController {
         accumulated.rightAnchor.constraint(equalTo: seeds.leftAnchor, constant: -3).isActive = true
         accumulated.centerYAnchor.constraint(equalTo: seeds.centerYAnchor).isActive = true
         
-        percent.leftAnchor.constraint(equalTo: badge.leftAnchor, constant: 14).isActive = true
+        percent.centerXAnchor.constraint(equalTo: badge.centerXAnchor).isActive = true
         percent.centerYAnchor.constraint(equalTo: badge.centerYAnchor).isActive = true
         
         plus.centerXAnchor.constraint(equalTo: base.centerXAnchor).isActive = true
-        plus.topAnchor.constraint(equalTo: base.topAnchor, constant: 80).isActive = true
+        plus.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
+        
+        close.centerXAnchor.constraint(equalTo: base.centerXAnchor).isActive = true
+        close.bottomAnchor.constraint(equalTo: base.bottomAnchor, constant: -60).isActive = true
         
         update(traitCollection)
         
@@ -217,5 +222,9 @@ final class Main: UIViewController {
 //        }) {
 //            add.tick()
 //        }
+    }
+    
+    @objc private func close() {
+        dismiss(animated: true)
     }
 }
