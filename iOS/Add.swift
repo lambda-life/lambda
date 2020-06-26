@@ -53,7 +53,7 @@ final class Add: UIViewController {
         let progress = UIView()
         progress.translatesAutoresizingMaskIntoConstraints = false
         progress.isUserInteractionEnabled = false
-        progress.backgroundColor = .init(white: 1, alpha: 0.1)
+        progress.backgroundColor = .quaternaryLabel
         progress.layer.cornerRadius = 10
         progress.clipsToBounds = true
         blur.contentView.addSubview(progress)
