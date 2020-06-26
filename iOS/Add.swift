@@ -37,7 +37,7 @@ final class Add: UIViewController {
         blurTop = blur.topAnchor.constraint(equalTo: view.topAnchor)
         blurTop!.isActive = true
         
-        let close = Button(icon: "x", color: .label)
+        let close = Button(text: .key("Cancel"), background: .clear, foreground: .label)
         close.target = self
         close.action = #selector(self.close)
         blur.contentView.addSubview(close)
@@ -73,17 +73,17 @@ final class Add: UIViewController {
         blur.contentView.addSubview(button)
         self.button = button
         
-        close.topAnchor.constraint(equalTo: blur.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        close.leftAnchor.constraint(equalTo: blur.safeAreaLayoutGuide.leftAnchor, constant: 10).isActive = true
-        
-        message.topAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
+        message.bottomAnchor.constraint(equalTo: progress.topAnchor, constant: -10).isActive = true
         message.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
         
-        button.bottomAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+        button.bottomAnchor.constraint(equalTo: close.topAnchor, constant: -10).isActive = true
         button.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
         
+        close.bottomAnchor.constraint(equalTo: blur.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+        close.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
+        
         progress.centerXAnchor.constraint(equalTo: blur.contentView.centerXAnchor).isActive = true
-        progress.centerYAnchor.constraint(equalTo: blur.contentView.centerYAnchor).isActive = true
+        progress.centerYAnchor.constraint(equalTo: blur.contentView.centerYAnchor, constant: -100).isActive = true
         progress.widthAnchor.constraint(equalToConstant: 204).isActive = true
         progress.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
