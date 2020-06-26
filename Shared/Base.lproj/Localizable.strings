@@ -3,6 +3,7 @@ Instructions = "Select a colour and\ncreate a new Automaton";
 Loading = "Loading...";
 Ready = "Ready";
 Add = "Add";
+Close = "Close";
 
 Lambda = "Lambda";
 About = "About";

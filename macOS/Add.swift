@@ -28,8 +28,8 @@ final class Add: NSView {
         self.view = view
         
         let close = Button(icon: "x", color: .controlTextColor)
-        self.close = close
         addSubview(close)
+        self.close = close
         
         let message = Label(.key("Loading"), .bold())
         addSubview(message)

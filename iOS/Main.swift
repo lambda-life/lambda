@@ -153,7 +153,7 @@ final class Main: UIViewController {
         plus.centerYAnchor.constraint(equalTo: base.centerYAnchor).isActive = true
         
         close.centerXAnchor.constraint(equalTo: base.centerXAnchor).isActive = true
-        close.bottomAnchor.constraint(equalTo: base.bottomAnchor, constant: -60).isActive = true
+        close.bottomAnchor.constraint(equalTo: base.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
         
         update(traitCollection)
         
@@ -210,28 +210,7 @@ final class Main: UIViewController {
     @objc private func adding() {
         game.state.add()
         plus.enabled = false
-        
-//        let add = Add(player: player, view: view, count: count)
-//        add.close.target = self
-//        add.close.action = #selector(cancel)
-//        add.button.target = self
-//        add.button.action = #selector(accept)
-//        contentView!.addSubview(add)
-//
-//        add.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
-//        add.centerYAnchor.constraint(equalTo: plus.centerYAnchor).isActive = true
-//        contentView!.layoutSubtreeIfNeeded()
-//        add.open()
-//
-//        NSAnimationContext.runAnimationGroup ({
-//            $0.duration = 0.6
-//            $0.allowsImplicitAnimation = true
-//            backgroundColor = .underPageBackgroundColor
-//            contentView!.layoutSubtreeIfNeeded()
-//            add.alphaValue = 1
-//        }) {
-//            add.tick()
-//        }
+        present(Add(player: player, game: game, count: count), animated: true)
     }
     
     @objc private func close() {
