@@ -84,6 +84,7 @@ final class Main: NSWindow {
         contentView!.addSubview(accumulated)
         self.accumulated = accumulated
         
+        view.heightAnchor.constraint(equalToConstant: 360).isActive = true
         view.leftAnchor.constraint(equalTo: contentView!.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: contentView!.rightAnchor).isActive = true
         view.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true

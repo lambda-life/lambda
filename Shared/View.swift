@@ -16,8 +16,6 @@ final class View: SKView, SKViewDelegate {
         ignoresSiblingOrder = true
         delegate = self
         
-        heightAnchor.constraint(equalToConstant: 360).isActive = true
-        
         state = Playing(view: self)
         
         let scene = SKScene()
