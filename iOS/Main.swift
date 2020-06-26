@@ -41,7 +41,10 @@ final class Main: UIViewController {
     
     private var count = 0 {
         didSet {
-            accumulated.text = decimal.string(from: .init(value: count))!
+            UIView.transition(with: accumulated, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
+                guard let self = self else { return }
+                self.accumulated.text = self.decimal.string(from: .init(value: self.count))!
+            })
         }
     }
     
@@ -154,11 +157,18 @@ final class Main: UIViewController {
         
         update(traitCollection)
         
-        game.universe.generation.sink { [weak self] in
+        game.universe.generation.sink { [weak self] new in
             guard let self = self else { return }
             self.count = min(self.count + 5, 99)
-            generation.text = self.decimal.string(from: .init(value: $0))!
-            percent.text = percentage.string(from: .init(value: game.universe.percent(self.player)))!
+            
+            UIView.transition(with: generation, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                generation.text = self.decimal.string(from: .init(value: new))!
+            })
+            
+            UIView.transition(with: percent, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                percent.text = percentage.string(from: .init(value: game.universe.percent(self.player)))!
+            })
+            
             self.plus.enabled = self.count > 0
         }.store(in: &subs)
     }
