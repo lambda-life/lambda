@@ -98,7 +98,7 @@ final class Main: NSWindow {
         seeds.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         seeds.rightAnchor.constraint(equalTo: contentView!.rightAnchor, constant: -20).isActive = true
         
-        badge.rightAnchor.constraint(equalTo: percent.rightAnchor, constant: 14).isActive = true
+        badge.widthAnchor.constraint(equalToConstant: 70).isActive = true
         badge.centerYAnchor.constraint(equalTo: clock.centerYAnchor).isActive = true
         badge.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
         badge.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -109,7 +109,7 @@ final class Main: NSWindow {
         accumulated.rightAnchor.constraint(equalTo: seeds.leftAnchor, constant: -3).isActive = true
         accumulated.centerYAnchor.constraint(equalTo: seeds.centerYAnchor).isActive = true
         
-        percent.leftAnchor.constraint(equalTo: badge.leftAnchor, constant: 14).isActive = true
+        percent.centerXAnchor.constraint(equalTo: badge.centerXAnchor).isActive = true
         percent.centerYAnchor.constraint(equalTo: badge.centerYAnchor).isActive = true
         
         plus.centerXAnchor.constraint(equalTo: contentView!.centerXAnchor).isActive = true
