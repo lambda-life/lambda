@@ -14,6 +14,7 @@ import AppKit
 }
 
 extension NSApplication {
+    @objc
     func launch() {
         (windows.filter { $0 is Launch }.first ?? Launch()).makeKeyAndOrderFront(nil)
     }

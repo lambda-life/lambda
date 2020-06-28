@@ -9,7 +9,9 @@ final class Menu: NSMenu {
 
     private var amadeus: NSMenuItem {
         menu(.key("Lambda"), items: [
-            .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
+        .init(title: .key("New"), action: #selector(NSApplication.launch), keyEquivalent: "n"),
+        .separator(),
+        .init(title: .key("About"), action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: ""),
         .separator(),
         .init(title: .key("Hide"), action: #selector(NSApplication.hide), keyEquivalent: "h"),
         {
